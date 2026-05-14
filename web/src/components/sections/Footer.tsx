@@ -45,15 +45,13 @@ function TelegramIcon({ size = 18 }: { size?: number }) {
 }
 
 const WHATSAPP_NUMBER = "5511999999999"; // placeholder; replace before launch
-const WHATSAPP_GREETING = encodeURIComponent(
-  "Olá! Vim do site da CodeFlying e queria saber mais.",
-);
 
 /**
  * Footer (PLAN §4 Section 11).
  * Dark substrate, 3 columns + bottom LGPD line.
  */
 export function Footer() {
+  const greeting = encodeURIComponent(copy.whatsapp.greeting);
   return (
     <footer className="bg-dark-deeper text-white/80 mt-auto">
       <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
@@ -66,7 +64,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-3 mt-2">
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_GREETING}`}
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${greeting}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
@@ -127,7 +125,7 @@ export function Footer() {
                 <li key={link.label}>
                   {"whatsapp" in link && link.whatsapp ? (
                     <a
-                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_GREETING}`}
+                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${greeting}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() =>
@@ -161,10 +159,10 @@ export function Footer() {
 
       {/* Floating WhatsApp button (mobile + desktop) */}
       <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_GREETING}`}
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${greeting}`}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Conversar no WhatsApp"
+        aria-label={copy.whatsapp.navAriaLabelFloating}
         onClick={() =>
           track("click_whatsapp_owner", { source_section: "floating" })
         }

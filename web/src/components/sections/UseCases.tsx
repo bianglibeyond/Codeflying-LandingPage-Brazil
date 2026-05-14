@@ -32,10 +32,10 @@ export function UseCases() {
               {/* Stacked mockup pair: site + TG */}
               <div className="flex flex-col gap-2">
                 <div className="aspect-[16/10] rounded-sm bg-coral/8 border border-coral/15 flex items-center justify-center text-caption text-coral/80">
-                  Site
+                  {copy.useCases.sitePreviewLabel}
                 </div>
                 <div className="aspect-[16/10] rounded-sm bg-telegram/8 border border-telegram/15 flex items-center justify-center text-caption text-telegram/80">
-                  Mini App no Telegram
+                  {copy.useCases.tgPreviewLabel}
                 </div>
               </div>
               <div className="flex flex-col gap-1">

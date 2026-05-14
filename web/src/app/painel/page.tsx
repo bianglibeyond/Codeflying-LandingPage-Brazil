@@ -23,7 +23,7 @@ export default function PainelPage() {
 function LoadingShell() {
   return (
     <div className="bg-substrate min-h-screen flex flex-col items-center justify-center px-6">
-      <p className="text-body-lg text-muted">Carregando...</p>
+      <p className="text-body-lg text-muted">{copy.painel.loading}</p>
     </div>
   );
 }
@@ -80,9 +80,9 @@ function PainelInner() {
   if (error) {
     return (
       <Shell>
-        <p className="text-body-lg text-coral">{error}</p>
+        <p className="text-body-lg text-coral">{copy.painel.invalidToken}</p>
         <Link href="/" className="text-body-sm text-muted underline mt-4">
-          Voltar pra home →
+          {copy.painel.homeLink}
         </Link>
       </Shell>
     );
@@ -199,7 +199,12 @@ function PaidDashboard({
       <Card>
         <Label>{copy.painel.statusLabel}</Label>
         {refunded ? (
-          <p className="text-body text-muted">Reembolsado em {data.refunded_at ? formatBRDate(data.refunded_at) : "—"}</p>
+          <p className="text-body text-muted">
+            {copy.painel.refundedOnDate.replace(
+              "{date}",
+              data.refunded_at ? formatBRDate(data.refunded_at) : "—",
+            )}
+          </p>
         ) : (
           <p className="text-body text-ink">
             ✓ {copy.painel.statusPaid.replace("{date}", data.paid_at ? formatBRDate(data.paid_at) : "—")}
@@ -244,17 +249,17 @@ function SoftDashboard({ data }: { data: MeResponse }) {
       <header className="rounded-md bg-warm border border-hairline p-5">
         <h1 className="text-h2 text-ink">
           {data.status === "email_only"
-            ? `Beleza, ${firstName}! Você está na nossa lista.`
+            ? copy.painel.softTitleEmailOnly.replace("{firstName}", firstName)
             : copy.painel.welcomeSoft}
         </h1>
         <p className="text-body text-body mt-2">
           {data.status === "email_only"
-            ? "Vamos te avisar pelo WhatsApp e pelo email cadastrado quando lançarmos."
-            : "Seu pagamento ainda não foi confirmado. Caso queira tentar novamente, volte pra página principal."}
+            ? copy.painel.softBodyEmailOnly
+            : copy.painel.softBodyIntent}
         </p>
       </header>
       <Link href="/" className="text-body-sm text-coral underline self-start">
-        Voltar pra home →
+        {copy.painel.homeLink}
       </Link>
     </Shell>
   );
@@ -300,7 +305,7 @@ function CopyField({ text }: { text: string }) {
 function ShareButtons({ link }: { link: string }) {
   if (!link) return null;
   const message = encodeURIComponent(
-    `Acabei de garantir minha vaga na CodeFlying — IA que cria site + bot no Telegram em 10 minutos. Pega a sua: ${link}`,
+    copy.shareTemplates.referralMessage.replace("{link}", link),
   );
   return (
     <div className="flex flex-wrap gap-2 mt-1">
@@ -386,7 +391,7 @@ function RefundButton({ token }: { token: string }) {
       {state === "loading"
         ? copy.painel.refundLoading
         : state === "confirming"
-          ? "Confirmar reembolso"
+          ? copy.painel.refundConfirming
           : copy.painel.refundLabel}
     </Button>
   );

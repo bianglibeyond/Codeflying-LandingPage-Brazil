@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { copy } from "@/lib/copy";
 
 interface LivePreviewProps {
   activeTemplate: string;
@@ -33,7 +34,7 @@ export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
           />
         </div>
         <p className="mt-6 text-center text-body-sm text-muted">
-          Um prompt. Dois canais. Sincronizados.
+          {copy.livePreview.captionDesktop}
         </p>
       </div>
     );
@@ -59,7 +60,7 @@ export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
         </div>
       </div>
       <p className="mt-12 text-body-sm text-muted text-center">
-        Um prompt → site + bot Telegram, sincronizados.
+        {copy.livePreview.captionMobile}
       </p>
     </div>
   );
@@ -87,7 +88,7 @@ function BrowserMockup({
         <span className="size-2 rounded-full bg-[#FEBC2E]" />
         <span className="size-2 rounded-full bg-[#28C840]" />
         <div className="mx-auto text-caption text-muted tabular-nums">
-          codeflying.app/seu-app
+          {copy.livePreview.browserUrl}
         </div>
       </div>
       {/* Browser content — varies by template */}
@@ -134,7 +135,7 @@ function BrowserMockup({
           transition={{ duration: 0.4, delay: 0.7 }}
           className="mt-2 h-7 rounded-full bg-ink flex items-center justify-center"
         >
-          <span className="text-[10px] text-white font-semibold">Comprar</span>
+          <span className="text-[10px] text-white font-semibold">{copy.livePreview.miniAppBuyLabel}</span>
         </motion.div>
       </div>
     </div>
@@ -185,7 +186,7 @@ function PhoneMockup({
             className="mt-1 h-5 rounded-full bg-ink flex items-center justify-center"
           >
             <span className="text-[8px] text-white font-semibold">
-              Comprar
+              {copy.livePreview.miniAppBuyLabel}
             </span>
           </motion.div>
         </motion.div>

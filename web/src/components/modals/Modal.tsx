@@ -166,7 +166,7 @@ function PayForm() {
             target="_blank"
             className="text-coral underline"
           >
-            (ler)
+            {copy.modal.pay.fields.lgpdReadLink}
           </a>
         </span>
       </label>
@@ -250,7 +250,7 @@ function EmailForm() {
           ✓
         </div>
         <h2 id="modal-title" className="text-h3 text-ink">
-          Pronto!
+          {copy.modal.emailOnly.doneTitle}
         </h2>
         <p className="text-body text-body">{success}</p>
       </div>
@@ -308,7 +308,7 @@ function EmailForm() {
             target="_blank"
             className="text-coral underline"
           >
-            (ler)
+            {copy.modal.pay.fields.lgpdReadLink}
           </a>
         </span>
       </label>

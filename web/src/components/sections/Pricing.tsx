@@ -116,7 +116,7 @@ function SoldOutNotice() {
         {copy.pricing.spotsFullLabel}
       </p>
       <p className="text-body-sm text-muted">
-        Próximo lote: Q3 2026. Te avisamos quando abrir.
+        {copy.pricing.soldOutSub}
       </p>
     </div>
   );

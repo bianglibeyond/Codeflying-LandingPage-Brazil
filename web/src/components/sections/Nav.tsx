@@ -29,7 +29,7 @@ export function Nav() {
       )}
     >
       <nav
-        aria-label="Navegação principal"
+        aria-label={copy.footer.navAriaLabel}
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6"
       >
         <Link href="/" className="flex items-center gap-2">

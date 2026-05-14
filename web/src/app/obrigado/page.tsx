@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { copy } from "@/lib/copy";
 
 export default function ObrigadoPage() {
   return (
@@ -15,7 +16,7 @@ export default function ObrigadoPage() {
 function LoadingShell() {
   return (
     <div className="bg-substrate min-h-screen flex flex-col items-center justify-center px-6">
-      <p className="text-body-lg text-muted">Carregando...</p>
+      <p className="text-body-lg text-muted">{copy.painel.loading}</p>
     </div>
   );
 }
@@ -88,10 +89,8 @@ function ObrigadoInner() {
       <div className="max-w-md text-center flex flex-col gap-4">
         {status === "polling" && (
           <>
-            <h1 className="text-h2 text-ink">Confirmando seu pagamento...</h1>
-            <p className="text-body text-body">
-              Pode levar uns segundos. Não feche essa página.
-            </p>
+            <h1 className="text-h2 text-ink">{copy.obrigado.confirming}</h1>
+            <p className="text-body text-body">{copy.obrigado.confirmingSub}</p>
             <div className="flex justify-center gap-1.5 mt-2" aria-hidden>
               {[0, 1, 2].map((i) => (
                 <span
@@ -103,25 +102,25 @@ function ObrigadoInner() {
                 />
               ))}
             </div>
-            <p className="text-caption text-muted">Tentativa {tries}/{MAX_TRIES}</p>
+            <p className="text-caption text-muted">
+              {copy.obrigado.attempt
+                .replace("{n}", String(tries))
+                .replace("{max}", String(MAX_TRIES))}
+            </p>
           </>
         )}
         {status === "redirecting" && (
           <>
-            <h1 className="text-h2 text-ink">Pagamento confirmado!</h1>
-            <p className="text-body text-body">Levando você pra dashboard...</p>
+            <h1 className="text-h2 text-ink">{copy.obrigado.paidTitle}</h1>
+            <p className="text-body text-body">{copy.obrigado.paidSub}</p>
           </>
         )}
         {status === "error" && (
           <>
-            <h1 className="text-h2 text-ink">Pagamento processando</h1>
-            <p className="text-body text-body">
-              Seu pagamento ainda está sendo verificado pelo Stripe. Vamos te avisar
-              pelo WhatsApp assim que confirmarmos. Você também pode tentar atualizar
-              esta página em alguns minutos.
-            </p>
+            <h1 className="text-h2 text-ink">{copy.obrigado.timeoutTitle}</h1>
+            <p className="text-body text-body">{copy.obrigado.timeoutBody}</p>
             <Link href="/" className="text-body-sm text-coral underline mt-4">
-              Voltar pra home
+              {copy.obrigado.homeLink}
             </Link>
           </>
         )}

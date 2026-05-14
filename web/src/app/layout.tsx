@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ClientProviders } from "@/components/ClientProviders";
+import { copy } from "@/lib/copy";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -13,25 +14,22 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://br.codeflying.app"),
   title: {
-    default: "CodeFlying — Crie seu app no Telegram + site em 10 minutos",
-    template: "%s · CodeFlying",
+    default: copy.meta.siteTitle,
+    template: copy.meta.siteTitleTemplate,
   },
-  description:
-    "Pra criadores brasileiros: site + Mini App no Telegram, sem comissão sobre venda. R$ 29/mês fixo. Os primeiros 100 entram por R$ 9,90.",
+  description: copy.meta.description,
   openGraph: {
     type: "website",
-    locale: "pt_BR",
+    locale: copy.meta.htmlLang === "pt-BR" ? "pt_BR" : "en_US",
     url: "https://br.codeflying.app",
     siteName: "CodeFlying",
-    title: "CodeFlying — Crie seu app no Telegram + site em 10 minutos",
-    description:
-      "Pra criadores brasileiros: site + Mini App no Telegram, sem comissão sobre venda. R$ 29/mês fixo.",
+    title: copy.meta.siteTitle,
+    description: copy.meta.descriptionShort,
   },
   twitter: {
     card: "summary_large_image",
-    title: "CodeFlying — Crie seu app em 10 minutos",
-    description:
-      "Site + Mini App no Telegram. Sem comissão. R$ 29/mês. Os primeiros 100 entram por R$ 9,90.",
+    title: copy.meta.twitterTitle,
+    description: copy.meta.twitterDescription,
   },
   robots: {
     index: true,
@@ -52,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} h-full antialiased`}>
+    <html lang={copy.meta.htmlLang} className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-substrate text-ink">
         <ClientProviders>{children}</ClientProviders>
         {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (

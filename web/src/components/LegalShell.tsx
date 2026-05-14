@@ -6,6 +6,7 @@
 
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { copy } from "@/lib/copy";
 
 export function LegalShell({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -16,7 +17,7 @@ export function LegalShell({ title, children }: { title: string; children: React
             CodeFlying
           </Link>
           <Link href="/" className="text-body-sm text-muted hover:text-ink transition-colors">
-            Voltar pra home →
+            {copy.painel.homeLink}
           </Link>
         </div>
       </header>
@@ -28,7 +29,7 @@ export function LegalShell({ title, children }: { title: string; children: React
       </main>
       <footer className="bg-dark-deeper text-white/70 mt-auto">
         <div className="mx-auto max-w-7xl px-6 py-8 text-caption">
-          © 2026 CodeFlying · Em conformidade com a LGPD · DPO: dpo@codeflying.app
+          {copy.footer.lgpdLine}
         </div>
       </footer>
     </div>

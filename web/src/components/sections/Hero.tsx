@@ -31,14 +31,8 @@ export function Hero() {
     setActiveTemplate(id);
     const template = copy.hero.templates.find((t) => t.id === id);
     if (template) {
-      const promptByTemplate: Record<string, string> = {
-        infoproduto: "Quero vender meu curso online com Pix e grupo VIP",
-        "bot-vip": "Bot VIP no Telegram com cobrança recorrente",
-        mentoria: "Site de mentoria com agenda e cobrança mensal",
-        "loja-tg": "Loja no Telegram com catálogo e checkout",
-        captura: "Página de captura pra meu lead magnet",
-      };
-      setPromptValue(promptByTemplate[id] ?? "");
+      const prompts = copy.hero.templatePrompts as Record<string, string>;
+      setPromptValue(prompts[id] ?? "");
       track("click_chip", { chip_name: id });
     }
   };
