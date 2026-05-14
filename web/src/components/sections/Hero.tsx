@@ -1,40 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 import { copy } from "@/lib/copy";
 import { DualCta } from "@/components/ui/DualCta";
 import { LivePreview } from "@/components/sections/LivePreview";
 import { TemplateChips } from "@/components/sections/TemplateChips";
 import { track } from "@/lib/analytics";
 
+/**
+ * Hero (PLAN §4 Section 2).
+ *
+ * Removed the "What do you want to build today?" prompt input — we can't
+ * actually generate anything from a prompt yet, so showing a fake input
+ * creates uncanny-valley friction. Template chips remain: clicking one
+ * updates the right-panel live preview so the user can see what kind of
+ * output they'd get for each scenario.
+ */
 export function Hero() {
   const [activeTemplate, setActiveTemplate] = useState<string>(
     copy.hero.templates[0].id,
   );
-  const [promptValue, setPromptValue] = useState("");
-  const reduceMotion = useReducedMotion();
-
-  // Rotate the prompt placeholder every 4s when the input is empty
-  const [placeholderIndex, setPlaceholderIndex] = useState(0);
-  useEffect(() => {
-    if (promptValue || reduceMotion) return;
-    const id = window.setInterval(() => {
-      setPlaceholderIndex(
-        (i) => (i + 1) % copy.hero.promptPlaceholders.length,
-      );
-    }, 4000);
-    return () => window.clearInterval(id);
-  }, [promptValue, reduceMotion]);
 
   const handleChipClick = (id: string) => {
     setActiveTemplate(id);
-    const template = copy.hero.templates.find((t) => t.id === id);
-    if (template) {
-      const prompts = copy.hero.templatePrompts as Record<string, string>;
-      setPromptValue(prompts[id] ?? "");
-      track("click_chip", { chip_name: id });
-    }
+    track("click_chip", { chip_name: id });
   };
 
   return (
@@ -57,7 +46,7 @@ export function Hero() {
       <div className="mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:py-32">
         {/* Desktop: 2-column split. Mobile: stacked with staggered overlap. */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
-          {/* LEFT — copy + form */}
+          {/* LEFT — copy + chips + CTAs */}
           <div className="flex flex-col gap-6">
             <p className="text-caption italic text-muted">
               {copy.hero.eyebrow}
@@ -90,7 +79,7 @@ export function Hero() {
               <span className="sm:hidden">{copy.hero.subMobile}</span>
             </p>
 
-            {/* Mobile-only: staggered preview between text and form */}
+            {/* Mobile-only: staggered preview between text and CTAs */}
             <div className="lg:hidden">
               <LivePreview
                 activeTemplate={activeTemplate}
@@ -98,35 +87,8 @@ export function Hero() {
               />
             </div>
 
-            {/* Micro-hint + prompt input */}
-            <div className="flex flex-col gap-3 mt-2">
-              <p className="text-body-sm text-muted">
-                {copy.hero.promptMicroHint}
-              </p>
-
-              <div className="relative">
-                <input
-                  type="text"
-                  value={promptValue}
-                  onChange={(e) => setPromptValue(e.target.value)}
-                  className="w-full rounded-md border border-hairline bg-white px-4 py-3 text-body placeholder:text-muted focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20"
-                  placeholder={copy.hero.promptPlaceholders[placeholderIndex]}
-                  aria-label="Descreva sua ideia"
-                />
-                {/* Rotating placeholder animation indicator (only when empty + motion allowed) */}
-                {!promptValue && !reduceMotion && (
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={placeholderIndex}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0 }} // fully transparent — placeholder is in the input
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </AnimatePresence>
-                )}
-              </div>
-
+            {/* Template chips — clicking updates the right-panel preview */}
+            <div className="mt-2">
               <TemplateChips
                 activeId={activeTemplate}
                 onChipClick={handleChipClick}
@@ -134,7 +96,7 @@ export function Hero() {
             </div>
 
             {/* Dual CTAs */}
-            <DualCta source="hero" prefillPrompt={promptValue} />
+            <DualCta source="hero" />
 
             {/* Tertiary text link to demo */}
             <a
