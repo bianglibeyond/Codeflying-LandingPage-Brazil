@@ -180,15 +180,11 @@ export const copy = {
     h2: "Nova no Brasil. Mas com história global.",
     sub:
       "Ainda não temos cases brasileiros pra mostrar — somos novos aqui. Mas veja o que criadores em outros mercados já construíram com a CodeFlying.",
-    legitimacyLabel: "Confira nossas operações em outros mercados:",
-    legitimacyLinks: [
-      {
-        flag: "🌐",
-        url: "https://www.codeflying.app/",
-        label: "codeflying.app",
-        context: "Site global em inglês",
-      },
-    ],
+    legitimacyHeadline: "Já servimos mais de 500 mil criadores em inglês.",
+    legitimacySub:
+      "A CodeFlying não é nova — construímos apps com criadores ao redor do mundo há anos. O Brasil é o capítulo novo. Veja nossa plataforma em inglês, ao vivo agora.",
+    legitimacyCta: "Visitar codeflying.app",
+    legitimacyUrl: "https://www.codeflying.app/",
     disclosure:
       "Casos reais. CodeFlying está em pré-lançamento no Brasil — você pode ser nosso primeiro caso brasileiro de sucesso.",
     encountersLabel: "Onde nos encontramos:",

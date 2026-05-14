@@ -4,9 +4,9 @@ import { copy } from "@/lib/copy";
 /**
  * Social proof section (PLAN §4 Section 7).
  * "New in Brazil. With global history." — authentic positioning.
- * Includes legitimacy links to global + China sites for verifiability.
- * 3 cards: global creator success cases. Real screenshots in Phase 2.
- * Warm-tinted substrate for reading area.
+ * Includes a prominent legitimacy card linking to the global English platform
+ * so BR users can verify CodeFlying exists at scale elsewhere.
+ * 3 cards: global creator success cases. Warm-tinted substrate.
  */
 export function SocialProof() {
   return (
@@ -26,40 +26,39 @@ export function SocialProof() {
           <p className="text-body-lg text-body">{copy.socialProof.sub}</p>
         </header>
 
-        {/* Legitimacy links — verifiable presence in other markets */}
-        <div className="mb-12 flex flex-col gap-3">
-          <p className="text-body-sm font-semibold text-muted uppercase tracking-wider">
-            {copy.socialProof.legitimacyLabel}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            {copy.socialProof.legitimacyLinks.map((link) => (
-              <a
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-3 rounded-md bg-white border border-hairline px-4 py-3 hover:border-coral hover:shadow-sm transition-all"
-              >
-                <span aria-hidden className="text-h3">
-                  {link.flag}
-                </span>
-                <div className="flex flex-col min-w-0">
-                  <span className="text-body font-semibold text-ink truncate">
-                    {link.label}
-                  </span>
-                  <span className="text-caption text-muted truncate">
-                    {link.context}
-                  </span>
-                </div>
-                <ArrowUpRight
-                  size={18}
-                  aria-hidden
-                  className="ml-auto shrink-0 text-muted group-hover:text-coral transition-colors"
-                />
-              </a>
-            ))}
+        {/* Legitimacy proof — prominent card with live English platform link */}
+        <a
+          href={copy.socialProof.legitimacyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mb-12 block rounded-md bg-white border-2 border-coral/30 hover:border-coral hover:shadow-lg transition-all p-6 sm:p-8 relative overflow-hidden"
+        >
+          {/* Soft coral gradient backdrop */}
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-0 opacity-40 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse at 100% 0%, rgba(255,127,83,0.18) 0%, transparent 60%)",
+            }}
+          />
+          <div className="relative z-10 flex flex-col sm:flex-row sm:items-center gap-5">
+            <div className="flex-1 flex flex-col gap-2">
+              <h3 className="text-h3 sm:text-h2 text-ink leading-tight tracking-tight">
+                {copy.socialProof.legitimacyHeadline}
+              </h3>
+              <p className="text-body text-body max-w-2xl">
+                {copy.socialProof.legitimacySub}
+              </p>
+            </div>
+            <div
+              className="inline-flex items-center justify-center gap-2 shrink-0 rounded-full bg-coral text-white px-6 py-3 text-body font-semibold shadow-coral group-hover:-translate-y-0.5 transition-transform"
+            >
+              <span>{copy.socialProof.legitimacyCta}</span>
+              <ArrowUpRight size={18} aria-hidden />
+            </div>
           </div>
-        </div>
+        </a>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {copy.socialProof.cards.map((c, i) => (

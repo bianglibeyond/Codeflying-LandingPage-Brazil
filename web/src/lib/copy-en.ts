@@ -141,15 +141,11 @@ export const copy = {
     h2: "New in Brazil. With global history.",
     sub:
       "We don't have Brazilian cases yet — we're new here. But take a look at what creators in other markets have already built with CodeFlying.",
-    legitimacyLabel: "Verify us in our other markets:",
-    legitimacyLinks: [
-      {
-        flag: "🌐",
-        url: "https://www.codeflying.app/",
-        label: "codeflying.app",
-        context: "Global English site",
-      },
-    ],
+    legitimacyHeadline: "We're already serving 500,000+ creators in English.",
+    legitimacySub:
+      "CodeFlying isn't new — we've been building apps with creators worldwide for years. Brazil is the new chapter. See our English platform live.",
+    legitimacyCta: "Visit codeflying.app",
+    legitimacyUrl: "https://www.codeflying.app/",
     disclosure:
       "Real cases. CodeFlying is in pre-launch in Brazil — you could be our first Brazilian success story.",
     encountersLabel: "Where to find us:",
