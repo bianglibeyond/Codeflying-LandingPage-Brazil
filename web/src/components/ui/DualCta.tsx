@@ -10,6 +10,12 @@ interface DualCtaProps {
   source: string; // analytics tag: 'hero' | 'pricing' | 'final' | 'nav'
   /** Layout: "stacked" (vertical, secondary below primary) | "inline" (horizontal). */
   layout?: "stacked" | "inline";
+  /**
+   * Alignment for stacked layout.
+   * "start" = left-aligned on desktop (used by hero).
+   * "center" = centered on all viewports (used by pricing + final CTA).
+   */
+  align?: "start" | "center";
   /** Display variant for the primary button. */
   primaryVariant?: "primary" | "dark";
   /** Pre-fill prompt to pass to pay-modal (for hero use). */
@@ -29,6 +35,7 @@ interface DualCtaProps {
 export function DualCta({
   source,
   layout = "stacked",
+  align = "start",
   primaryVariant = "primary",
   prefillPrompt,
   primaryLabel,
@@ -47,12 +54,15 @@ export function DualCta({
     openEmail();
   };
 
+  const stackedAlign =
+    align === "center" ? "items-center" : "items-center sm:items-start";
+
   return (
     <div
       className={cn(
         "flex",
         layout === "stacked"
-          ? "flex-col items-center gap-3 sm:items-start"
+          ? `flex-col gap-3 ${stackedAlign}`
           : "flex-col sm:flex-row sm:items-center gap-3",
         className,
       )}
@@ -62,13 +72,24 @@ export function DualCta({
         variant={primaryVariant}
         size="lg"
         onClick={handlePay}
-        className={layout === "stacked" ? "w-full sm:w-auto" : ""}
+        className={
+          layout === "stacked"
+            ? align === "center"
+              ? "w-full sm:w-auto"
+              : "w-full sm:w-auto"
+            : ""
+        }
       >
         {primaryLabel ?? copy.hero.ctaPrimary}
       </Button>
 
       {!hidePaymentNote && layout === "stacked" && (
-        <p className="text-caption text-muted sm:-mt-1">
+        <p
+          className={cn(
+            "text-caption text-muted sm:-mt-1",
+            align === "center" && "text-center",
+          )}
+        >
           {copy.hero.ctaPaymentNote}
         </p>
       )}

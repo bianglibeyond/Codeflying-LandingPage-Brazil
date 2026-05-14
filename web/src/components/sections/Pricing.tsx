@@ -87,9 +87,10 @@ export function Pricing() {
                 <DualCta
                   source="pricing"
                   layout="stacked"
+                  align="center"
                   primaryLabel={copy.pricing.ctaPrimary}
                   hidePaymentNote
-                  className="items-center w-full"
+                  className="w-full"
                 />
                 <p className="text-caption text-coral text-center -mt-2">
                   {copy.pricing.creditNote}

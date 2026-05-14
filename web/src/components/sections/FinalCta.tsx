@@ -20,9 +20,9 @@ export function FinalCta() {
         </h2>
         <DualCta
           source="final"
+          align="center"
           primaryLabel={copy.finalCta.ctaPrimary}
           hidePaymentNote
-          className="items-center"
         />
         <p className="text-caption text-white/60">{copy.finalCta.paymentNote}</p>
       </div>
