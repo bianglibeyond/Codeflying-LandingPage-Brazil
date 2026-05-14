@@ -70,21 +70,21 @@ export const copy = {
     h2: "Mesma ideia. Três canais. Um único produto criado pela IA.",
     sub:
       "Enquanto a Hotmart cobra 9,9% como marketplace e a Lovable te dá só site, a CodeFlying entrega o pacote completo: site + loja no Telegram + catálogo no WhatsApp — nos seus canais próprios, sem comissão sobre venda.",
-    siteTitle: "Site",
+    siteTitle: "Website",
     siteBullets: [
       "SEO (Google encontra)",
       "Captura de leads",
       "Domínio próprio",
       "Analytics",
     ],
-    tgTitle: "Loja no Telegram",
+    tgTitle: "Telegram Mini App",
     tgBullets: [
       "Viralização nativa do Telegram",
       "Pagamento sem sair do chat",
       "Entrega instantânea de PDF",
       "Comunidade VIP integrada",
     ],
-    waTitle: "Catálogo no WhatsApp",
+    waTitle: "WhatsApp Flow",
     waBullets: [
       "Onde seus clientes já estão (99% dos brasileiros)",
       "Catálogo + agendamento + Flows",
