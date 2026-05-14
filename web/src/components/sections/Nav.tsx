@@ -39,12 +39,6 @@ export function Nav() {
         </Link>
 
         <div className="flex items-center gap-4">
-          <a
-            href="https://app.codeflying.app"
-            className="hidden sm:inline-block text-body-sm text-muted hover:text-ink transition-colors"
-          >
-            {copy.nav.ctaLogin}
-          </a>
           <Button
             variant="primary"
             size="sm"
