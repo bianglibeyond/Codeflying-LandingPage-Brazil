@@ -188,12 +188,6 @@ export const copy = {
         label: "codeflying.app",
         context: "Site global em inglês",
       },
-      {
-        flag: "🇨🇳",
-        url: "https://www.codeflying.net/",
-        label: "codeflying.net",
-        context: "Mercado de origem (China) · 500 mil+ criadores",
-      },
     ],
     disclosure:
       "Casos reais. CodeFlying está em pré-lançamento no Brasil — você pode ser nosso primeiro caso brasileiro de sucesso.",
