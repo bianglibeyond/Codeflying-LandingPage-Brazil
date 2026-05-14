@@ -40,14 +40,14 @@ export const copy = {
     ],
     templates: [
       { id: "infoproduto", label: "Loja de infoproduto", icon: "🌐", channel: "tg" },
-      { id: "bot-vip", label: "Bot VIP Telegram", icon: "✈️", channel: "tg" },
-      { id: "mentoria", label: "Site de mentoria com agenda", icon: "🌐", channel: "tg" },
-      { id: "loja-tg", label: "Loja no Telegram com catálogo", icon: "✈️", channel: "tg" },
-      { id: "captura", label: "Página de captura", icon: "🌐", channel: "tg" },
       { id: "restaurante", label: "Restaurante + WhatsApp", icon: "💬", channel: "wa" },
+      { id: "bot-vip", label: "Bot VIP Telegram", icon: "✈️", channel: "tg" },
       { id: "salao", label: "Salão de beleza no WhatsApp", icon: "💬", channel: "wa" },
+      { id: "mentoria", label: "Site de mentoria com agenda", icon: "🌐", channel: "tg" },
       { id: "loja-retail", label: "Catálogo da loja", icon: "💬", channel: "wa" },
+      { id: "loja-tg", label: "Loja no Telegram com catálogo", icon: "✈️", channel: "tg" },
       { id: "b2b", label: "Funil B2B no WhatsApp", icon: "💬", channel: "wa" },
+      { id: "captura", label: "Página de captura", icon: "🌐", channel: "tg" },
     ],
     templatePrompts: {
       infoproduto: "Quero vender meu curso online com Pix e grupo VIP",
