@@ -44,8 +44,8 @@ export function Hero() {
       />
 
       <div className="mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:py-32">
-        {/* Desktop: 2-column split. Mobile: stacked with staggered overlap. */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
+        {/* Tablet+: 2-column split. Phone: stacked with staggered overlap. */}
+        <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-12 md:gap-10 lg:gap-16 items-center">
           {/* LEFT — copy + chips + CTAs */}
           <div className="flex flex-col gap-6">
             <p className="text-caption italic text-muted">
@@ -56,7 +56,7 @@ export function Hero() {
               id="hero-h1"
               className="text-display text-ink leading-tight tracking-tight"
             >
-              {/* Desktop H1 */}
+              {/* Wider screens: full H1 */}
               <span className="hidden sm:inline">
                 {copy.hero.h1Desktop[0]}{" "}
                 <span className="text-coral-gradient">
@@ -64,7 +64,7 @@ export function Hero() {
                 </span>
                 .
               </span>
-              {/* Mobile H1 */}
+              {/* Phone: compressed H1 */}
               <span className="sm:hidden">
                 {copy.hero.h1Mobile[0]}{" "}
                 <span className="text-coral-gradient">
@@ -79,8 +79,8 @@ export function Hero() {
               <span className="sm:hidden">{copy.hero.subMobile}</span>
             </p>
 
-            {/* Mobile-only: staggered preview between text and CTAs */}
-            <div className="lg:hidden">
+            {/* Phone-only: staggered preview between text and CTAs */}
+            <div className="md:hidden">
               <LivePreview
                 activeTemplate={activeTemplate}
                 variant="mobile-overlap"
@@ -107,8 +107,8 @@ export function Hero() {
             </a>
           </div>
 
-          {/* RIGHT — live preview (desktop only; mobile gets staggered version above) */}
-          <div className="hidden lg:block">
+          {/* RIGHT — live preview (tablet+ only; phone gets staggered version above) */}
+          <div className="hidden md:block">
             <LivePreview activeTemplate={activeTemplate} variant="desktop" />
           </div>
         </div>

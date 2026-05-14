@@ -25,8 +25,8 @@ export const copy = {
     eyebrow: "Pra criadores e SMBs brasileiros, em português. Cartão hoje, Pix em breve.",
     h1Desktop: ["Crie seu site + Telegram + WhatsApp", "em 10 minutos."],
     h1Highlight: "em 10 minutos",
-    h1Mobile: ["Site + Telegram + WhatsApp", "em segundos."],
-    h1MobileHighlight: "em segundos",
+    h1Mobile: ["Site + Telegram + WhatsApp", "em 10 minutos."],
+    h1MobileHighlight: "em 10 minutos",
     subDesktop:
       "Descreva sua ideia pra IA. A gente entrega site + loja no Telegram + catálogo no WhatsApp + checkout — tudo de um prompt. R$ 29/mês fixo. Sem comissão sobre venda.",
     subMobile:

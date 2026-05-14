@@ -21,8 +21,8 @@ export const copy = {
     eyebrow: "For Brazilian creators and SMBs, in Portuguese. Card today, Pix soon.",
     h1Desktop: ["Build your site + Telegram + WhatsApp", "in 10 minutes."],
     h1Highlight: "in 10 minutes",
-    h1Mobile: ["Site + Telegram + WhatsApp", "in seconds."],
-    h1MobileHighlight: "in seconds",
+    h1Mobile: ["Site + Telegram + WhatsApp", "in 10 minutes."],
+    h1MobileHighlight: "in 10 minutes",
     subDesktop:
       "Describe your idea to the AI. We deliver site + Telegram store + WhatsApp catalog + checkout — all from one prompt. R$ 29/month flat. Zero sales commission.",
     subMobile: "Site + Telegram + WhatsApp. R$ 29/month. Zero sales commission.",
