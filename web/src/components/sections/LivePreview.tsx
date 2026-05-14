@@ -30,16 +30,22 @@ export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
   if (variant === "desktop") {
     return (
       <div className="relative">
-        <div className="grid grid-cols-[1.9fr_1fr] gap-4 items-center">
+        <div className="relative">
+          {/* Browser is the large canvas, filling the column */}
           <BrowserMockup
             activeTemplate={activeTemplate}
             animate={!reduceMotion}
+            wide
           />
-          <PhoneMockup
-            activeTemplate={activeTemplate}
-            channel={channel}
-            animate={!reduceMotion}
-          />
+          {/* Phone overlaps bottom-right of browser, bottoms aligned */}
+          <div className="absolute right-0 bottom-0 w-[32%] z-10">
+            <PhoneMockup
+              activeTemplate={activeTemplate}
+              channel={channel}
+              animate={!reduceMotion}
+              compact
+            />
+          </div>
         </div>
         <p className="mt-6 text-center text-body-sm text-muted">
           {copy.livePreview.captionDesktop}
@@ -79,17 +85,22 @@ function BrowserMockup({
   activeTemplate,
   animate,
   compact = false,
+  wide = false,
 }: {
   activeTemplate: string;
   animate: boolean;
   compact?: boolean;
+  /** Wide variant for desktop staggered-overlap: full width, taller aspect, more content. */
+  wide?: boolean;
 }) {
   return (
     <div
       className={cn(
         "rounded-browser bg-white shadow-md overflow-hidden border border-hairline",
       )}
-      style={{ aspectRatio: compact ? "16/11" : "5/3" }}
+      style={{
+        aspectRatio: wide ? "16/11" : compact ? "16/11" : "5/3",
+      }}
     >
       {/* Browser chrome */}
       <div className="flex items-center gap-1.5 px-3 py-2 border-b border-hairline bg-warm/50">
