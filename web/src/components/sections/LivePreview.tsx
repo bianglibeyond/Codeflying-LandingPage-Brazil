@@ -30,7 +30,7 @@ export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
   if (variant === "desktop") {
     return (
       <div className="relative">
-        <div className="grid grid-cols-[1.4fr_1fr] gap-4 items-end">
+        <div className="grid grid-cols-[1.9fr_1fr] gap-4 items-center">
           <BrowserMockup
             activeTemplate={activeTemplate}
             animate={!reduceMotion}
@@ -89,7 +89,7 @@ function BrowserMockup({
       className={cn(
         "rounded-browser bg-white shadow-md overflow-hidden border border-hairline",
       )}
-      style={{ aspectRatio: compact ? "16/11" : "16/10" }}
+      style={{ aspectRatio: compact ? "16/11" : "5/3" }}
     >
       {/* Browser chrome */}
       <div className="flex items-center gap-1.5 px-3 py-2 border-b border-hairline bg-warm/50">
