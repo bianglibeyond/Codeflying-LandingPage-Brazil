@@ -4,6 +4,8 @@ import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { copy } from "@/lib/copy";
 
+type Channel = "tg" | "wa";
+
 interface LivePreviewProps {
   activeTemplate: string;
   /** "desktop" = side-by-side. "mobile-overlap" = staggered overlap pattern. */
@@ -11,14 +13,19 @@ interface LivePreviewProps {
 }
 
 /**
- * Dual-output animated mockup.
- * Desktop: browser + phone frames side by side, content fills in together.
- * Mobile: staggered overlap — browser at 80% width, phone overlaps bottom-right.
- * Both share the same data: "Um prompt → site + bot Telegram sincronizados".
- * Respects prefers-reduced-motion (renders static end-state if reduced).
+ * Multi-output animated mockup.
+ * Phone frame swaps between Telegram and WhatsApp based on the active template's
+ * channel attribute (creator chips → Telegram; SMB chips → WhatsApp).
+ * Desktop: browser + phone side-by-side. Mobile: staggered overlap.
  */
+function channelFor(templateId: string): Channel {
+  const template = copy.hero.templates.find((t) => t.id === templateId);
+  return ((template as { channel?: Channel } | undefined)?.channel ?? "tg") as Channel;
+}
+
 export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
   const reduceMotion = useReducedMotion();
+  const channel = channelFor(activeTemplate);
 
   if (variant === "desktop") {
     return (
@@ -30,6 +37,7 @@ export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
           />
           <PhoneMockup
             activeTemplate={activeTemplate}
+            channel={channel}
             animate={!reduceMotion}
           />
         </div>
@@ -54,6 +62,7 @@ export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
         <div className="absolute right-0 bottom-[-8%] w-[38%]">
           <PhoneMockup
             activeTemplate={activeTemplate}
+            channel={channel}
             animate={!reduceMotion}
             compact
           />
@@ -144,13 +153,21 @@ function BrowserMockup({
 
 function PhoneMockup({
   activeTemplate,
+  channel,
   animate,
   compact = false,
 }: {
   activeTemplate: string;
+  channel: Channel;
   animate: boolean;
   compact?: boolean;
 }) {
+  const isWa = channel === "wa";
+  // WhatsApp green vs Telegram blue
+  const headerBg = isWa ? "#075E54" : "var(--color-telegram)";
+  const handleLabel = isWa ? "Sua Loja" : "@seucanalbot";
+  const accentBg = isWa ? "bg-[#25D366]" : "bg-coral/20";
+
   return (
     <div
       className={cn(
@@ -158,45 +175,54 @@ function PhoneMockup({
       )}
       style={{ aspectRatio: "9/16" }}
     >
-      {/* Telegram header */}
+      {/* Header */}
       <div
         className="px-3 py-2 flex items-center gap-2"
-        style={{ background: "var(--color-telegram)" }}
+        style={{ background: headerBg }}
       >
         <div className="size-6 rounded-full bg-white/30" />
-        <div className="text-[9px] text-white font-semibold">@seucanalbot</div>
+        <div className="text-[9px] text-white font-semibold">{handleLabel}</div>
       </div>
       {/* Chat content */}
-      <div className="flex flex-col gap-2 p-3 bg-white">
-        {/* Mini App card animated in */}
+      <div className={cn("flex flex-col gap-2 p-3", isWa ? "bg-[#ECE5DD]" : "bg-white")}>
+        {/* Product/booking card animated in */}
         <motion.div
           key={`phone-card-${activeTemplate}`}
           initial={animate ? { opacity: 0, y: 8 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="rounded-md border border-hairline p-2 bg-warm/30 flex flex-col gap-1.5"
+          className={cn(
+            "rounded-md border border-hairline p-2 flex flex-col gap-1.5",
+            isWa ? "bg-white" : "bg-warm/30",
+          )}
         >
-          <div className="h-12 rounded-sm bg-coral/20" />
+          <div className={cn("h-12 rounded-sm", accentBg)} />
           <div className="h-2 rounded-sm bg-hairline w-3/4" />
           <div className="h-1.5 rounded-sm bg-hairline w-1/2" />
           <motion.div
             initial={animate ? { opacity: 0 } : false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: 0.7 }}
-            className="mt-1 h-5 rounded-full bg-ink flex items-center justify-center"
+            className={cn(
+              "mt-1 h-5 rounded-full flex items-center justify-center",
+              isWa ? "bg-[#25D366]" : "bg-ink",
+            )}
           >
             <span className="text-[8px] text-white font-semibold">
               {copy.livePreview.miniAppBuyLabel}
             </span>
           </motion.div>
         </motion.div>
-        {/* Telegram-style chat message */}
+        {/* Chat message bubble */}
         {!compact && (
           <motion.div
             initial={animate ? { opacity: 0, x: -6 } : false}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, delay: 0.6 }}
-            className="self-start max-w-[80%] rounded-md bg-warm px-2 py-1"
+            className={cn(
+              "self-start max-w-[80%] rounded-md px-2 py-1",
+              isWa ? "bg-white" : "bg-warm",
+            )}
           >
             <div className="h-1.5 rounded-sm bg-hairline w-16" />
           </motion.div>

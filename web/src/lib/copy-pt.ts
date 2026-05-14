@@ -22,28 +22,32 @@ export const copy = {
   },
 
   hero: {
-    eyebrow: "Pra criadores brasileiros, em português. Cartão hoje, Pix em breve.",
-    h1Desktop: ["Crie seu app no Telegram + site", "em 10 minutos."],
+    eyebrow: "Pra criadores e SMBs brasileiros, em português. Cartão hoje, Pix em breve.",
+    h1Desktop: ["Crie seu site + Telegram + WhatsApp", "em 10 minutos."],
     h1Highlight: "em 10 minutos",
-    h1Mobile: ["Crie seu site e bot", "em segundos."],
+    h1Mobile: ["Site + Telegram + WhatsApp", "em segundos."],
     h1MobileHighlight: "em segundos",
     subDesktop:
-      "Descreva sua ideia pra IA. A gente entrega site + Mini App no Telegram + checkout pronto. R$ 29/mês fixo. Sem comissão sobre venda.",
+      "Descreva sua ideia pra IA. A gente entrega site + loja no Telegram + catálogo no WhatsApp + checkout — tudo de um prompt. R$ 29/mês fixo. Sem comissão sobre venda.",
     subMobile:
-      "Site + Mini App no Telegram. R$ 29/mês. Sem comissão sobre venda.",
+      "Site + Telegram + WhatsApp. R$ 29/mês. Sem comissão sobre venda.",
     promptMicroHint: "O que você quer construir hoje?",
     promptPlaceholders: [
-      "Quero vender meu curso de maquiagem com Pix e grupo VIP no Telegram",
+      "Quero vender meu curso online com Pix e grupo VIP no Telegram",
       "Coach de academia: site + bot do Telegram pra entregar treinos",
-      "Mentoria mensal: site de captura + comunidade VIP com cobrança recorrente",
-      "Nutricionista: agenda online + entrega de planos via Telegram",
+      "Restaurante: cardápio + pedidos no WhatsApp + agendamento de delivery",
+      "Salão de beleza: agendamento no WhatsApp + lembretes + fidelidade",
     ],
     templates: [
-      { id: "infoproduto", label: "Loja de infoproduto", icon: "🌐" },
-      { id: "bot-vip", label: "Bot VIP Telegram", icon: "✈️" },
-      { id: "mentoria", label: "Site de mentoria com agenda", icon: "🌐" },
-      { id: "loja-tg", label: "Loja no Telegram com catálogo", icon: "✈️" },
-      { id: "captura", label: "Página de captura", icon: "🌐" },
+      { id: "infoproduto", label: "Loja de infoproduto", icon: "🌐", channel: "tg" },
+      { id: "bot-vip", label: "Bot VIP Telegram", icon: "✈️", channel: "tg" },
+      { id: "mentoria", label: "Site de mentoria com agenda", icon: "🌐", channel: "tg" },
+      { id: "loja-tg", label: "Loja no Telegram com catálogo", icon: "✈️", channel: "tg" },
+      { id: "captura", label: "Página de captura", icon: "🌐", channel: "tg" },
+      { id: "restaurante", label: "Restaurante + WhatsApp", icon: "💬", channel: "wa" },
+      { id: "salao", label: "Salão de beleza no WhatsApp", icon: "💬", channel: "wa" },
+      { id: "loja-retail", label: "Catálogo da loja", icon: "💬", channel: "wa" },
+      { id: "b2b", label: "Funil B2B no WhatsApp", icon: "💬", channel: "wa" },
     ],
     templatePrompts: {
       infoproduto: "Quero vender meu curso online com Pix e grupo VIP",
@@ -51,6 +55,10 @@ export const copy = {
       mentoria: "Site de mentoria com agenda e cobrança mensal",
       "loja-tg": "Loja no Telegram com catálogo e checkout",
       captura: "Página de captura pra meu lead magnet",
+      restaurante: "Cardápio do restaurante + pedidos no WhatsApp + agendamento",
+      salao: "Salão: agendamento no WhatsApp + lembretes",
+      "loja-retail": "Catálogo da loja + checkout no WhatsApp",
+      b2b: "Funil B2B + follow-up no WhatsApp",
     },
     ctaPrimary: "Garantir minha vaga — R$ 9,90",
     ctaPaymentNote: "Pagamento via cartão (Stripe). Pix em Q3 2026.",
@@ -59,9 +67,9 @@ export const copy = {
   },
 
   dualOutput: {
-    h2: "Mesma ideia. Dois canais. Um único produto criado pela IA.",
+    h2: "Mesma ideia. Três canais. Um único produto criado pela IA.",
     sub:
-      "Enquanto Hotmart te cobra 9,9% como marketplace e Lovable te dá só site, a CodeFlying entrega o pacote completo: site + Mini App no Telegram, no seu canal próprio, sem comissão sobre venda.",
+      "Enquanto a Hotmart cobra 9,9% como marketplace e a Lovable te dá só site, a CodeFlying entrega o pacote completo: site + loja no Telegram + catálogo no WhatsApp — nos seus canais próprios, sem comissão sobre venda.",
     siteTitle: "Site",
     siteBullets: [
       "SEO (Google encontra)",
@@ -69,14 +77,21 @@ export const copy = {
       "Domínio próprio",
       "Analytics",
     ],
-    tgTitle: "Telegram Mini App",
+    tgTitle: "Loja no Telegram",
     tgBullets: [
       "Viralização nativa do Telegram",
       "Pagamento sem sair do chat",
       "Entrega instantânea de PDF",
       "Comunidade VIP integrada",
     ],
-    syncCaption: "Um prompt. Dois canais. Sincronizados.",
+    waTitle: "Catálogo no WhatsApp",
+    waBullets: [
+      "Onde seus clientes já estão (99% dos brasileiros)",
+      "Catálogo + agendamento + Flows",
+      "Auto-resposta + follow-up de entrega",
+      "Pagamento via link Pix",
+    ],
+    syncCaption: "Um prompt. Três canais. Sincronizados.",
   },
 
   trustStrip: {
@@ -247,7 +262,7 @@ export const copy = {
       },
       {
         q: "Funciona com WhatsApp também?",
-        a: "No momento focamos em Telegram + site. WhatsApp na roadmap.",
+        a: "Sim, no dia 1. Geramos site + loja no Telegram + catálogo no WhatsApp a partir de um único prompt. Clique em qualquer template 'WhatsApp' no topo da página para ver o que é gerado.",
       },
       {
         q: "Como fica a LGPD?",
@@ -460,8 +475,8 @@ export const copy = {
   },
 
   livePreview: {
-    captionDesktop: "Um prompt. Dois canais. Sincronizados.",
-    captionMobile: "Um prompt → site + bot Telegram, sincronizados.",
+    captionDesktop: "Um prompt. Vários canais. Sincronizados.",
+    captionMobile: "Um prompt → site + Telegram + WhatsApp, sincronizados.",
     browserUrl: "codeflying.app/seu-app",
     miniAppBuyLabel: "Comprar",
   },

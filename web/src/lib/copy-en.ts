@@ -18,27 +18,31 @@ export const copy = {
   },
 
   hero: {
-    eyebrow: "For Brazilian creators, in Portuguese. Card today, Pix soon.",
-    h1Desktop: ["Build your Telegram app + website", "in 10 minutes."],
+    eyebrow: "For Brazilian creators and SMBs, in Portuguese. Card today, Pix soon.",
+    h1Desktop: ["Build your site + Telegram + WhatsApp", "in 10 minutes."],
     h1Highlight: "in 10 minutes",
-    h1Mobile: ["Build your site + bot", "in seconds."],
+    h1Mobile: ["Site + Telegram + WhatsApp", "in seconds."],
     h1MobileHighlight: "in seconds",
     subDesktop:
-      "Describe your idea to the AI. We deliver site + Telegram Mini App + checkout, ready. R$ 29/month flat. Zero sales commission.",
-    subMobile: "Site + Mini App on Telegram. R$ 29/month. Zero sales commission.",
+      "Describe your idea to the AI. We deliver site + Telegram store + WhatsApp catalog + checkout — all from one prompt. R$ 29/month flat. Zero sales commission.",
+    subMobile: "Site + Telegram + WhatsApp. R$ 29/month. Zero sales commission.",
     promptMicroHint: "What do you want to build today?",
     promptPlaceholders: [
-      "I want to sell my makeup course with Pix + a VIP Telegram group",
+      "I want to sell my online course with Pix and a VIP Telegram group",
       "Gym coach: site + Telegram bot to deliver workouts",
-      "Monthly mentorship: landing page + VIP community with recurring billing",
-      "Nutritionist: online booking + plan delivery via Telegram",
+      "Restaurant menu + orders via WhatsApp + delivery booking",
+      "Beauty salon: WhatsApp bookings + reminders + loyalty",
     ],
     templates: [
-      { id: "infoproduto", label: "Info-product store", icon: "🌐" },
-      { id: "bot-vip", label: "VIP Telegram bot", icon: "✈️" },
-      { id: "mentoria", label: "Mentorship site with bookings", icon: "🌐" },
-      { id: "loja-tg", label: "Telegram store with catalog", icon: "✈️" },
-      { id: "captura", label: "Landing page", icon: "🌐" },
+      { id: "infoproduto", label: "Info-product store", icon: "🌐", channel: "tg" },
+      { id: "bot-vip", label: "VIP Telegram bot", icon: "✈️", channel: "tg" },
+      { id: "mentoria", label: "Mentorship + bookings", icon: "🌐", channel: "tg" },
+      { id: "loja-tg", label: "Telegram store with catalog", icon: "✈️", channel: "tg" },
+      { id: "captura", label: "Landing page", icon: "🌐", channel: "tg" },
+      { id: "restaurante", label: "Restaurant + WhatsApp menu", icon: "💬", channel: "wa" },
+      { id: "salao", label: "Beauty salon bookings", icon: "💬", channel: "wa" },
+      { id: "loja-retail", label: "Boutique store catalog", icon: "💬", channel: "wa" },
+      { id: "b2b", label: "B2B consulting funnel", icon: "💬", channel: "wa" },
     ],
     templatePrompts: {
       infoproduto: "I want to sell my online course with Pix and a VIP group",
@@ -46,6 +50,10 @@ export const copy = {
       mentoria: "Mentorship site with scheduling and monthly billing",
       "loja-tg": "Telegram store with catalog and checkout",
       captura: "Landing page for my lead magnet",
+      restaurante: "Restaurant menu + WhatsApp orders + delivery booking",
+      salao: "Beauty salon: WhatsApp bookings + reminders",
+      "loja-retail": "Boutique catalog + WhatsApp checkout",
+      b2b: "B2B consulting funnel + WhatsApp follow-up",
     },
     ctaPrimary: "Reserve my spot — R$ 9.90",
     ctaPaymentNote: "Payment by card (Stripe). Pix in Q3 2026.",
@@ -54,9 +62,9 @@ export const copy = {
   },
 
   dualOutput: {
-    h2: "One idea. Two channels. One product built by AI.",
+    h2: "One idea. Three channels. One product built by AI.",
     sub:
-      "While Hotmart charges you 9.9% as a marketplace and Lovable gives you only a website, CodeFlying delivers the full package: site + Mini App on Telegram, on your own channel, zero sales commission.",
+      "While Hotmart charges 9.9% as a marketplace and Lovable gives you only a website, CodeFlying delivers the full bundle: your site + Telegram store + WhatsApp catalog — on your own channels, zero sales commission.",
     siteTitle: "Site",
     siteBullets: [
       "SEO (Google finds you)",
@@ -64,14 +72,21 @@ export const copy = {
       "Custom domain",
       "Analytics",
     ],
-    tgTitle: "Telegram Mini App",
+    tgTitle: "Telegram store",
     tgBullets: [
       "Native Telegram virality",
       "Pay without leaving the chat",
       "Instant PDF delivery",
       "VIP community built in",
     ],
-    syncCaption: "One prompt. Two channels. In sync.",
+    waTitle: "WhatsApp catalog",
+    waBullets: [
+      "Where your customers already are (99% of Brazilians)",
+      "Catalog + bookings + Flows",
+      "Auto-reply + delivery follow-up",
+      "Pay via Pix link",
+    ],
+    syncCaption: "One prompt. Three channels. In sync.",
   },
 
   trustStrip: {
@@ -208,7 +223,7 @@ export const copy = {
       },
       {
         q: "Does it work with WhatsApp too?",
-        a: "Right now we focus on Telegram + site. WhatsApp is on the roadmap.",
+        a: "Yes, day one. We generate site + Telegram store + WhatsApp catalog from a single prompt. Click any 'WhatsApp' template chip on the hero to see what gets built.",
       },
       {
         q: "What about LGPD?",
@@ -419,8 +434,8 @@ export const copy = {
   },
 
   livePreview: {
-    captionDesktop: "One prompt. Two channels. In sync.",
-    captionMobile: "One prompt → site + Telegram bot, in sync.",
+    captionDesktop: "One prompt. Multiple channels. In sync.",
+    captionMobile: "One prompt → site + Telegram + WhatsApp, in sync.",
     browserUrl: "codeflying.app/your-app",
     miniAppBuyLabel: "Buy",
   },
