@@ -28,32 +28,32 @@ export const copy = {
     h1Mobile: ["Site + Telegram + WhatsApp", "em 10 minutos."],
     h1MobileHighlight: "em 10 minutos",
     subDesktop:
-      "Descreva sua ideia pra IA. A gente entrega site + loja no Telegram + catálogo no WhatsApp + checkout — tudo de um prompt. R$ 29/mês fixo. Sem comissão sobre venda.",
+      "Descreva sua ideia pra IA. A gente entrega Website + Telegram Mini App + WhatsApp Flow + checkout — tudo de um prompt. R$ 29/mês fixo. Sem comissão sobre venda.",
     subMobile:
-      "Site + Telegram + WhatsApp. R$ 29/mês. Sem comissão sobre venda.",
+      "Website + Telegram Mini App + WhatsApp Flow. R$ 29/mês. Sem comissão sobre venda.",
     promptMicroHint: "O que você quer construir hoje?",
     promptPlaceholders: [
       "Quero vender meu curso online com Pix e grupo VIP no Telegram",
-      "Coach de academia: site + bot do Telegram pra entregar treinos",
+      "Coach de academia: Website + Telegram Mini App pra entregar treinos",
       "Restaurante: cardápio + pedidos no WhatsApp + agendamento de delivery",
       "Salão de beleza: agendamento no WhatsApp + lembretes + fidelidade",
     ],
     templates: [
       { id: "infoproduto", label: "Loja de infoproduto", icon: "🌐", channel: "tg" },
-      { id: "restaurante", label: "Restaurante + WhatsApp", icon: "💬", channel: "wa" },
-      { id: "bot-vip", label: "Bot VIP Telegram", icon: "✈️", channel: "tg" },
+      { id: "restaurante", label: "Restaurante + WhatsApp Flow", icon: "💬", channel: "wa" },
+      { id: "bot-vip", label: "Telegram Mini App VIP", icon: "✈️", channel: "tg" },
       { id: "salao", label: "Salão de beleza no WhatsApp", icon: "💬", channel: "wa" },
       { id: "mentoria", label: "Site de mentoria com agenda", icon: "🌐", channel: "tg" },
       { id: "loja-retail", label: "Catálogo da loja", icon: "💬", channel: "wa" },
-      { id: "loja-tg", label: "Loja no Telegram com catálogo", icon: "✈️", channel: "tg" },
+      { id: "loja-tg", label: "Loja Telegram Mini App", icon: "✈️", channel: "tg" },
       { id: "b2b", label: "Funil B2B no WhatsApp", icon: "💬", channel: "wa" },
       { id: "captura", label: "Página de captura", icon: "🌐", channel: "tg" },
     ],
     templatePrompts: {
       infoproduto: "Quero vender meu curso online com Pix e grupo VIP",
-      "bot-vip": "Bot VIP no Telegram com cobrança recorrente",
+      "bot-vip": "Telegram Mini App VIP com cobrança recorrente",
       mentoria: "Site de mentoria com agenda e cobrança mensal",
-      "loja-tg": "Loja no Telegram com catálogo e checkout",
+      "loja-tg": "Loja Telegram Mini App com catálogo e checkout",
       captura: "Página de captura pra meu lead magnet",
       restaurante: "Cardápio do restaurante + pedidos no WhatsApp + agendamento",
       salao: "Salão: agendamento no WhatsApp + lembretes",
@@ -69,7 +69,7 @@ export const copy = {
   dualOutput: {
     h2: "Mesma ideia. Três canais. Um único produto criado pela IA.",
     sub:
-      "Enquanto a Hotmart cobra 9,9% como marketplace e a Lovable te dá só site, a CodeFlying entrega o pacote completo: site + loja no Telegram + catálogo no WhatsApp — nos seus canais próprios, sem comissão sobre venda.",
+      "Enquanto a Hotmart cobra 9,9% como marketplace e a Lovable te dá só site, a CodeFlying entrega o pacote completo: Website + Telegram Mini App + WhatsApp Flow — nos seus canais próprios, sem comissão sobre venda.",
     siteTitle: "Website",
     siteBullets: [
       "SEO (Google encontra)",
@@ -129,8 +129,8 @@ export const copy = {
       },
     ],
     cardLink: "Ver template →",
-    sitePreviewLabel: "Site",
-    tgPreviewLabel: "Mini App no Telegram",
+    sitePreviewLabel: "Website",
+    tgPreviewLabel: "Telegram Mini App",
   },
 
   pixComparison: {
@@ -226,7 +226,7 @@ export const copy = {
     pricePostLaunch: "R$ 49",
     pricePostLaunchSuffix: "depois do lançamento",
     bullets: [
-      "Site + Telegram Mini App",
+      "Website + Telegram Mini App + WhatsApp Flow",
       "Sem comissão sobre venda",
       "Templates pra creator brasileiro",
       "Suporte em português via WhatsApp",
@@ -271,7 +271,7 @@ export const copy = {
       },
       {
         q: "Funciona com WhatsApp também?",
-        a: "Sim, no dia 1. Geramos site + loja no Telegram + catálogo no WhatsApp a partir de um único prompt. Clique em qualquer template 'WhatsApp' no topo da página para ver o que é gerado.",
+        a: "Sim, no dia 1. Geramos Website + Telegram Mini App + WhatsApp Flow a partir de um único prompt. Clique em qualquer template 'WhatsApp' no topo da página para ver o que é gerado.",
       },
       {
         q: "Como fica a LGPD?",
@@ -475,12 +475,12 @@ export const copy = {
     siteTitle: "CodeFlying — Crie seu app no Telegram + site em 10 minutos",
     siteTitleTemplate: "%s · CodeFlying",
     description:
-      "Pra criadores brasileiros: site + Mini App no Telegram, sem comissão sobre venda. R$ 29/mês fixo. Os primeiros 100 entram por R$ 9,90.",
+      "Pra criadores brasileiros: Website + Telegram Mini App + WhatsApp Flow, sem comissão sobre venda. R$ 29/mês fixo. Os primeiros 100 entram por R$ 9,90.",
     descriptionShort:
-      "Pra criadores brasileiros: site + Mini App no Telegram, sem comissão. R$ 29/mês fixo.",
+      "Pra criadores brasileiros: Website + Telegram Mini App + WhatsApp Flow, sem comissão. R$ 29/mês fixo.",
     twitterTitle: "CodeFlying — Crie seu app em 10 minutos",
     twitterDescription:
-      "Site + Mini App no Telegram. Sem comissão. R$ 29/mês. Os primeiros 100 entram por R$ 9,90.",
+      "Website + Telegram Mini App + WhatsApp Flow. Sem comissão. R$ 29/mês. Os primeiros 100 entram por R$ 9,90.",
   },
 
   livePreview: {
@@ -497,6 +497,6 @@ export const copy = {
 
   shareTemplates: {
     referralMessage:
-      "Acabei de garantir minha vaga na CodeFlying — IA que cria site + bot no Telegram em 10 minutos. Pega a sua: {link}",
+      "Acabei de garantir minha vaga na CodeFlying — IA que cria Website + Telegram Mini App + WhatsApp Flow em 10 minutos. Pega a sua: {link}",
   },
 } as const;
