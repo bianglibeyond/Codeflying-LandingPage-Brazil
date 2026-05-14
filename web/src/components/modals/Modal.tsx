@@ -7,6 +7,7 @@ import { z } from "zod";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input, Select } from "@/components/ui/Input";
+import { Turnstile } from "@/components/ui/Turnstile";
 import { copy } from "@/lib/copy";
 import { useModal } from "@/lib/modal-context";
 import { useUtm } from "@/hooks/useUtm";
@@ -76,6 +77,7 @@ function PayForm() {
   const utm = useUtm();
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
 
   const {
     register,
@@ -93,13 +95,18 @@ function PayForm() {
         email: data.email,
         whatsapp: data.whatsapp,
         use_case: data.use_case,
+        turnstile_token: turnstileToken || undefined,
         ...utm,
       });
       track("start_checkout", { amount: 990 });
       window.location.href = resp.checkout_url;
     } catch (err) {
       if (err instanceof ApiError && err.status === 409) {
-        // Already-paid user — backend should return a dashboard URL in the message
+        // Backend returns the dashboard URL in the detail
+        if (err.message?.startsWith("http")) {
+          window.location.href = err.message;
+          return;
+        }
         setServerError(copy.modal.pay.alreadyPaid);
       } else {
         setServerError(copy.modal.pay.errorGeneric);
@@ -175,6 +182,8 @@ function PayForm() {
         </p>
       )}
 
+      <Turnstile onVerify={setTurnstileToken} />
+
       <Button
         type="submit"
         variant="primary"
@@ -197,6 +206,7 @@ function EmailForm() {
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
 
   const {
     register,
@@ -214,6 +224,7 @@ function EmailForm() {
         email: data.email,
         whatsapp: data.whatsapp,
         use_case: data.use_case,
+        turnstile_token: turnstileToken || undefined,
         ...utm,
       });
       if (resp.status === "already_paid" && resp.dashboard_url) {
@@ -312,6 +323,8 @@ function EmailForm() {
           {serverError}
         </p>
       )}
+
+      <Turnstile onVerify={setTurnstileToken} />
 
       <Button
         type="submit"

@@ -6,7 +6,7 @@ then returns the hosted checkout URL.
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 
 from ..auth import dashboard_url
 from ..rate_limit import enforce_rate_limit
@@ -16,6 +16,7 @@ from ..stripe_client import (
     create_checkout_session,
     create_customer,
     find_customer_by_email,
+    stripe_client,
     update_customer_status,
 )
 from ..turnstile import verify_turnstile
@@ -93,3 +94,30 @@ async def create_checkout(form: LeadForm, request: Request):
     session = create_checkout_session(customer_id=customer.id, lead_id=customer.id)
 
     return CheckoutCreateResponse(checkout_url=session.url)
+
+
+@router.get("/checkout/session-status")
+async def session_status(session_id: str = Query(...)):
+    """Poll endpoint for the /obrigado page.
+
+    After Stripe redirects with ?session_id=cs_test_xxx, the frontend polls
+    here every 2s waiting for the webhook to flip Customer.metadata.status='paid'.
+
+    Returns {"ready": bool, "dashboard_url": str | None}.
+    """
+    s = stripe_client()
+    try:
+        sess = s.checkout.Session.retrieve(session_id)
+    except Exception:
+        raise HTTPException(status_code=404, detail="Session not found")
+
+    customer_id = sess.customer
+    if not customer_id:
+        return {"ready": False}
+
+    customer = s.Customer.retrieve(customer_id)
+    md = customer.metadata or {}
+    if md.get("status") == "paid":
+        return {"ready": True, "dashboard_url": dashboard_url(customer_id)}
+
+    return {"ready": False}

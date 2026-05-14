@@ -1,8 +1,10 @@
 "use client";
 
 import { type ReactNode, useEffect } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { ModalProvider } from "@/lib/modal-context";
 import { Modal, useModalAria } from "@/components/modals/Modal";
+import { PixelsLoader } from "@/components/PixelsLoader";
 import { track } from "@/lib/analytics";
 
 /**
@@ -10,6 +12,7 @@ import { track } from "@/lib/analytics";
  * - ModalProvider: shared state for pay/email modals
  * - Renders the Modal component once (it conditionally shows based on state)
  * - Fires view_landing analytics event on mount
+ * - Loads Vercel Analytics (always, essential) + consent-gated marketing pixels
  */
 export function ClientProviders({ children }: { children: ReactNode }) {
   return (
@@ -17,6 +20,8 @@ export function ClientProviders({ children }: { children: ReactNode }) {
       <PageViewTracker />
       <ModalShell />
       {children}
+      <Analytics />
+      <PixelsLoader />
     </ModalProvider>
   );
 }
