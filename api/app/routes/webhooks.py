@@ -61,9 +61,9 @@ async def _handle_paid(event) -> None:
     s = stripe_client()
 
     obj = event.data.object
-    customer_id: str | None = (
-        getattr(obj, "customer", None) or obj.metadata.get("customer_id") if hasattr(obj, "metadata") else None
-    )
+    customer_id: str | None = getattr(obj, "customer", None)
+    if not customer_id and hasattr(obj, "metadata") and obj.metadata:
+        customer_id = obj.metadata.to_dict().get("customer_id")
     payment_intent_id: str | None = getattr(obj, "payment_intent", None)
     if isinstance(payment_intent_id, dict):
         payment_intent_id = payment_intent_id.get("id")
@@ -74,7 +74,7 @@ async def _handle_paid(event) -> None:
     # Fetch the customer to check current status (idempotency v2 — if metadata.status
     # is already 'paid', this is a redelivery for an event we processed)
     customer = s.Customer.retrieve(customer_id)
-    current_status = (customer.metadata or {}).get("status", "")
+    current_status = (customer.metadata.to_dict() if customer.metadata else {}).get("status", "")
     if current_status == "paid":
         return  # already processed
 
@@ -140,7 +140,7 @@ async def _handle_refunded(event) -> None:
             return
 
     customer = s.Customer.retrieve(customer_id)
-    md = customer.metadata or {}
+    md = customer.metadata.to_dict() if customer.metadata else {}
     if md.get("status") == "refunded":
         return  # already processed
 

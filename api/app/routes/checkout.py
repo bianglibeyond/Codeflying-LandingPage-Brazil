@@ -64,7 +64,7 @@ async def create_checkout(form: LeadForm, request: Request):
     existing = find_customer_by_email(form.email)
 
     if existing:
-        current_status = (existing.metadata or {}).get("status", "")
+        current_status = (existing.metadata.to_dict() if existing.metadata else {}).get("status", "")
         if current_status == "paid":
             # Already-paid user — redirect to their dashboard
             raise HTTPException(
@@ -116,7 +116,7 @@ async def session_status(session_id: str = Query(...)):
         return {"ready": False}
 
     customer = s.Customer.retrieve(customer_id)
-    md = customer.metadata or {}
+    md = customer.metadata.to_dict() if customer.metadata else {}
     if md.get("status") == "paid":
         return {"ready": True, "dashboard_url": dashboard_url(customer_id)}
 

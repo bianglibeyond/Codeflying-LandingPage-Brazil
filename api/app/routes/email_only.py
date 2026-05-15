@@ -54,7 +54,7 @@ async def email_only(form: LeadForm, request: Request):
 
     existing = find_customer_by_email(form.email)
     if existing:
-        current_status = (existing.metadata or {}).get("status", "")
+        current_status = (existing.metadata.to_dict() if existing.metadata else {}).get("status", "")
         if current_status == "paid":
             return EmailOnlyResponse(
                 status="already_paid",

@@ -48,7 +48,7 @@ async def refund(token: str = Query(...)):
 
     s = stripe_client()
     customer = s.Customer.retrieve(customer_id)
-    md = customer.metadata or {}
+    md = customer.metadata.to_dict() if customer.metadata else {}
     if md.get("status") != "paid":
         raise HTTPException(status_code=400, detail="Not refundable: status is not 'paid'")
 
@@ -103,7 +103,7 @@ async def _fetch_customer_cached(customer_id: str) -> dict:
         "id": customer.id,
         "email": customer.email,
         "name": customer.name,
-        "metadata": dict(customer.metadata or {}),
+        "metadata": customer.metadata.to_dict() if customer.metadata else {},
     }
     await redis.set(cache_key, json.dumps(payload), ex=DASHBOARD_CACHE_TTL)
     return payload
