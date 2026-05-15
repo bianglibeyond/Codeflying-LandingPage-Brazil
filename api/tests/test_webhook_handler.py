@@ -94,7 +94,7 @@ def mock_stripe():
 
 @pytest.mark.asyncio
 async def test_handle_paid_normal_first_signup(fake_redis, mock_stripe):
-    """A normal paid event: counter goes to 1, customer marked paid, referral set."""
+    """A normal paid event: counter goes to 1, customer marked paid."""
     mock_stripe.stripe.Customer.retrieve.return_value = _make_customer(
         id_="cus_abc", status="intent_pending"
     )
@@ -106,10 +106,6 @@ async def test_handle_paid_normal_first_signup(fake_redis, mock_stripe):
     # Counter incremented to 1
     assert int(await fake_redis.get(Keys.paid_count)) == 1
 
-    # Referral code stored under that customer
-    referrals = await fake_redis.hgetall(Keys.referrals)
-    assert "cus_abc" in referrals.values()
-
     # Customer marked as paid with position 1
     assert len(mock_stripe.customer_writes) == 1
     write = mock_stripe.customer_writes[0]
@@ -117,7 +113,6 @@ async def test_handle_paid_normal_first_signup(fake_redis, mock_stripe):
     assert write["new_status"] == "paid"
     assert write["extra"]["position"] == "1"
     assert write["extra"]["credit_brl_cents"] == "5000"
-    assert "referral_code" in write["extra"]
     assert "paid_at" in write["extra"]
     assert "refund_deadline_at" in write["extra"]
 

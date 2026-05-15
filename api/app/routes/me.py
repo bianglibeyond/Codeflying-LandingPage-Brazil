@@ -38,7 +38,6 @@ async def me(token: str = Query(...)):
         email=customer.get("email", "") or "",
         position=_int_or_none(md.get("position")),
         credit_brl_cents=_int_or_none(md.get("credit_brl_cents")),
-        referral_code=md.get("referral_code") or None,
         paid_at=md.get("paid_at") or None,
         refund_deadline_at=md.get("refund_deadline_at") or None,
         refunded_at=md.get("refunded_at") or None,
@@ -65,7 +64,7 @@ async def submit_survey(
         return {"status": "already_submitted"}
 
     # Sanitize factors — only allow known values + truncate length
-    allowed = {"language", "telegram", "whatsapp", "pricing", "other"}
+    allowed = {"language", "whatsapp", "telegram", "other"}
     factors = [f for f in payload.factors if f in allowed][:10]
     other_text = (payload.other_text or "")[:500]  # Stripe metadata max 500 chars/value
 

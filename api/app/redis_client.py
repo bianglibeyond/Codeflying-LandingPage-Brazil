@@ -2,7 +2,6 @@
 
 Keys used:
   - waitlist:paid_count             (atomic counter of Tier 1 signups)
-  - waitlist:referrals              (HASH code -> customer_id)
   - stripe:event:<event_id>         (idempotency, 7-day TTL)
   - rl:<endpoint>:<key>             (rate limit counters, short TTL)
   - dashboard:<customer_id>         (cached Stripe Customer object, 60s TTL)
@@ -39,7 +38,6 @@ async def close_redis() -> None:
 # Convenience constants
 class Keys:
     paid_count = "waitlist:paid_count"
-    referrals = "waitlist:referrals"
 
     @staticmethod
     def stripe_event(event_id: str) -> str:

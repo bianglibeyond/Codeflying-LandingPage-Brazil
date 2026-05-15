@@ -35,7 +35,6 @@ export interface MeResponse {
   email: string;
   position?: number;
   credit_brl_cents?: number;
-  referral_code?: string;
   paid_at?: string;
   refund_deadline_at?: string;
   refunded_at?: string;

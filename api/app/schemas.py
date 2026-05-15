@@ -35,7 +35,6 @@ class MeResponse(BaseModel):
     email: str
     position: int | None = None
     credit_brl_cents: int | None = None
-    referral_code: str | None = None
     paid_at: str | None = None
     refund_deadline_at: str | None = None
     refunded_at: str | None = None

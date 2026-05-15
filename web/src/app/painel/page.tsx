@@ -30,7 +30,7 @@ function LoadingShell() {
 /**
  * Dashboard (PLAN §7).
  * Auth via signed URL HMAC token. No JWT, no cookie.
- * Renders position, credit, referral code, share buttons, refund flow.
+ * Renders position, credit, status, post-payment survey, refund flow.
  * Fires confetti on first visit (welcome=1 param).
  */
 function PainelInner() {

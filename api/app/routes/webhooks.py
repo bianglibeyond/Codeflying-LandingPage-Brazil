@@ -6,7 +6,6 @@ charge.refunded events. Idempotency via Redis SETNX with 7-day TTL.
 
 from __future__ import annotations
 
-import secrets
 import time
 
 import stripe
@@ -102,10 +101,6 @@ async def _handle_paid(event) -> None:
             )
         return
 
-    referral_code = secrets.token_urlsafe(8)
-    # HSETNX prevents overwrite if somehow this was re-triggered
-    await redis.hsetnx(Keys.referrals, referral_code, customer_id)
-
     now_ts = int(time.time())
     refund_deadline_ts = now_ts + 7 * 24 * 60 * 60
 
@@ -114,7 +109,6 @@ async def _handle_paid(event) -> None:
         new_status="paid",
         extra={
             "position": str(pos),
-            "referral_code": referral_code,
             "credit_brl_cents": str(cfg.signup_credit_brl_cents),
             "paid_at": _iso(now_ts),
             "refund_deadline_at": _iso(refund_deadline_ts),

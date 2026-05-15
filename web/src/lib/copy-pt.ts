@@ -415,11 +415,6 @@ export const copy = {
     positionOf: "de 100",
     creditLabel: "Crédito acumulado",
     creditValue: "R$ 50 de crédito reservado pra você",
-    referralLabel: "Código de indicação",
-    referralCopy: "Copiar link",
-    referralCopied: "Copiado!",
-    referralHelp:
-      "Indique amigos e ganhe R$ 9,90 por indicação paga — basicamente uma vaga grátis pra você.",
     statusLabel: "Status",
     statusPaid: "Pago em {date}",
     nextStepsLabel: "Próximos passos",
@@ -428,10 +423,6 @@ export const copy = {
       "Você é notificado via WhatsApp",
       "Crédito aplicado automaticamente",
     ],
-    shareLabel: "Compartilhe sua vaga",
-    shareWhatsapp: "WhatsApp",
-    shareInstagram: "Instagram",
-    shareTelegram: "Telegram",
     refundLabel: "Solicitar reembolso",
     refundWithinWindow:
       "Reembolso disponível por mais {days} dias.",
@@ -457,9 +448,8 @@ export const copy = {
       sub: "Marque tudo o que te ajudou a decidir. A gente usa isso pra focar no que importa.",
       factors: [
         { value: "language", label: "É em português / focado no Brasil" },
+        { value: "whatsapp", label: "Inclui WhatsApp Mini App" },
         { value: "telegram", label: "Inclui Telegram Mini App" },
-        { value: "whatsapp", label: "Inclui WhatsApp Flow" },
-        { value: "pricing", label: "Modelo de preço (mensalidade fixa, 0% de comissão)" },
         { value: "other", label: "Outro (especifique)" },
       ],
       otherPlaceholder: "Conta pra gente em suas palavras...",
@@ -505,10 +495,5 @@ export const copy = {
   whatsapp: {
     greeting: "Olá! Vim do site da CodeFlying e queria saber mais.",
     navAriaLabelFloating: "Conversar no WhatsApp",
-  },
-
-  shareTemplates: {
-    referralMessage:
-      "Acabei de garantir minha vaga na CodeFlying — IA que cria Website + Telegram Mini App + WhatsApp Flow em 10 minutos. Pega a sua: {link}",
   },
 } as const;

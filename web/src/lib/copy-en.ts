@@ -374,11 +374,6 @@ export const copy = {
     positionOf: "of 100",
     creditLabel: "Credit accumulated",
     creditValue: "R$ 50 in credit reserved for you",
-    referralLabel: "Referral code",
-    referralCopy: "Copy link",
-    referralCopied: "Copied!",
-    referralHelp:
-      "Refer friends and earn R$ 9.90 per paid referral — basically a free signup back to you.",
     statusLabel: "Status",
     statusPaid: "Paid on {date}",
     nextStepsLabel: "Next steps",
@@ -387,10 +382,6 @@ export const copy = {
       "We'll notify you via WhatsApp",
       "Credit applied automatically",
     ],
-    shareLabel: "Share your spot",
-    shareWhatsapp: "WhatsApp",
-    shareInstagram: "Instagram",
-    shareTelegram: "Telegram",
     refundLabel: "Request refund",
     refundWithinWindow:
       "Refund available for {days} more days.",
@@ -416,9 +407,8 @@ export const copy = {
       sub: "Tick any that helped you decide. We use this to focus on what matters.",
       factors: [
         { value: "language", label: "It's in Portuguese / Brazilian-first" },
+        { value: "whatsapp", label: "WhatsApp Mini App is included" },
         { value: "telegram", label: "Telegram Mini App is included" },
-        { value: "whatsapp", label: "WhatsApp Flow is included" },
-        { value: "pricing", label: "Pricing model (flat fee, 0% commission)" },
         { value: "other", label: "Other (please specify)" },
       ],
       otherPlaceholder: "Tell us in your own words...",
@@ -464,10 +454,5 @@ export const copy = {
   whatsapp: {
     greeting: "Hi! I came from the CodeFlying site and wanted to know more.",
     navAriaLabelFloating: "Chat on WhatsApp",
-  },
-
-  shareTemplates: {
-    referralMessage:
-      "I just reserved my spot at CodeFlying — AI that builds a Website + Telegram Mini App + WhatsApp Flow in 10 minutes. Grab yours: {link}",
   },
 } as const;
