@@ -22,6 +22,15 @@ from app.redis_client import Keys
 from app.routes.webhooks import _handle_paid, _handle_refunded
 
 
+def _md(d: dict | None):
+    """Build a fake StripeObject-like with a .to_dict() method (mirrors real Stripe SDK)."""
+    if d is None:
+        return None
+    obj = SimpleNamespace(**d)
+    obj.to_dict = lambda d=d: dict(d)
+    return obj
+
+
 def _make_event(event_type: str, *, customer_id: str, payment_intent: str = "pi_test_1"):
     """Build a minimal Stripe-event-shaped object suitable for our handlers."""
     return SimpleNamespace(
@@ -31,15 +40,18 @@ def _make_event(event_type: str, *, customer_id: str, payment_intent: str = "pi_
             object=SimpleNamespace(
                 customer=customer_id,
                 payment_intent=payment_intent,
-                metadata={"customer_id": customer_id},
+                metadata=_md({"customer_id": customer_id}),
             )
         ),
     )
 
 
-def _make_customer(*, id_: str, status: str = "intent_pending"):
+def _make_customer(*, id_: str, status: str = "intent_pending", extra: dict | None = None):
     """A fake Stripe Customer object retrieved by `s.Customer.retrieve`."""
-    return SimpleNamespace(id=id_, metadata={"status": status})
+    md = {"status": status}
+    if extra:
+        md.update(extra)
+    return SimpleNamespace(id=id_, metadata=_md(md))
 
 
 @pytest.fixture
@@ -170,7 +182,7 @@ async def test_handle_paid_skips_when_no_customer_id(fake_redis, mock_stripe):
             object=SimpleNamespace(
                 customer=None,
                 payment_intent="pi_x",
-                metadata={},
+                metadata=_md({}),
             )
         ),
     )
@@ -196,7 +208,7 @@ async def test_handle_refunded_within_window_decrements(fake_redis, mock_stripe)
     deadline = (datetime.now(timezone.utc) + timedelta(days=3)).isoformat()
     mock_stripe.stripe.Customer.retrieve.return_value = SimpleNamespace(
         id="cus_refund",
-        metadata={"status": "paid", "refund_deadline_at": deadline},
+        metadata=_md({"status": "paid", "refund_deadline_at": deadline}),
     )
 
     event = _make_event("charge.refunded", customer_id="cus_refund")
@@ -222,7 +234,7 @@ async def test_handle_refunded_after_window_keeps_seat(fake_redis, mock_stripe):
     deadline = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
     mock_stripe.stripe.Customer.retrieve.return_value = SimpleNamespace(
         id="cus_late_refund",
-        metadata={"status": "paid", "refund_deadline_at": deadline},
+        metadata=_md({"status": "paid", "refund_deadline_at": deadline}),
     )
 
     event = _make_event("charge.refunded", customer_id="cus_late_refund")
@@ -242,7 +254,7 @@ async def test_handle_refunded_idempotent(fake_redis, mock_stripe):
     await fake_redis.set(Keys.paid_count, 50)
     mock_stripe.stripe.Customer.retrieve.return_value = SimpleNamespace(
         id="cus_dup_refund",
-        metadata={"status": "refunded"},
+        metadata=_md({"status": "refunded"}),
     )
 
     event = _make_event("charge.refunded", customer_id="cus_dup_refund")
