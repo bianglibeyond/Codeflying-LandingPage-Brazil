@@ -419,7 +419,7 @@ export const copy = {
     referralCopy: "Copiar link",
     referralCopied: "Copiado!",
     referralHelp:
-      "Indique amigos e ganhe R$ 50 a mais por indicação que pagar.",
+      "Indique amigos e ganhe R$ 9,90 por indicação paga — basicamente uma vaga grátis pra você.",
     statusLabel: "Status",
     statusPaid: "Pago em {date}",
     nextStepsLabel: "Próximos passos",
@@ -452,6 +452,22 @@ export const copy = {
       "Vamos te avisar pelo WhatsApp e pelo email cadastrado quando lançarmos.",
     softBodyIntent:
       "Seu pagamento ainda não foi confirmado. Caso queira tentar novamente, volte pra página principal.",
+    survey: {
+      title: "O que te fez garantir sua vaga?",
+      sub: "Marque tudo o que te ajudou a decidir. A gente usa isso pra focar no que importa.",
+      factors: [
+        { value: "language", label: "É em português / focado no Brasil" },
+        { value: "telegram", label: "Inclui Telegram Mini App" },
+        { value: "whatsapp", label: "Inclui WhatsApp Flow" },
+        { value: "pricing", label: "Modelo de preço (mensalidade fixa, 0% de comissão)" },
+        { value: "other", label: "Outro (especifique)" },
+      ],
+      otherPlaceholder: "Conta pra gente em suas palavras...",
+      submit: "Enviar",
+      submitLoading: "Salvando...",
+      thanks: "Valeu! Isso ajuda muito.",
+      errorGeneric: "Tivemos um problema. Tente de novo.",
+    },
   },
 
   obrigado: {

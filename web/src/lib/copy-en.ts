@@ -378,7 +378,7 @@ export const copy = {
     referralCopy: "Copy link",
     referralCopied: "Copied!",
     referralHelp:
-      "Refer friends and earn R$ 50 extra per paid referral.",
+      "Refer friends and earn R$ 9.90 per paid referral — basically a free signup back to you.",
     statusLabel: "Status",
     statusPaid: "Paid on {date}",
     nextStepsLabel: "Next steps",
@@ -411,6 +411,22 @@ export const copy = {
       "We'll notify you via WhatsApp and the email you provided when we launch.",
     softBodyIntent:
       "Your payment hasn't been confirmed yet. If you'd like to try again, head back to the main page.",
+    survey: {
+      title: "What pushed you to reserve your spot?",
+      sub: "Tick any that helped you decide. We use this to focus on what matters.",
+      factors: [
+        { value: "language", label: "It's in Portuguese / Brazilian-first" },
+        { value: "telegram", label: "Telegram Mini App is included" },
+        { value: "whatsapp", label: "WhatsApp Flow is included" },
+        { value: "pricing", label: "Pricing model (flat fee, 0% commission)" },
+        { value: "other", label: "Other (please specify)" },
+      ],
+      otherPlaceholder: "Tell us in your own words...",
+      submit: "Submit",
+      submitLoading: "Saving...",
+      thanks: "Thanks! That helps a lot.",
+      errorGeneric: "Something went wrong. Try again.",
+    },
   },
 
   obrigado: {

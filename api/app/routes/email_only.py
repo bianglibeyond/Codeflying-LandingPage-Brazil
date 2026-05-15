@@ -32,20 +32,13 @@ async def email_only(form: LeadForm, request: Request):
     redis = get_redis()
     client_host = request.client.host if request.client else ""
 
-    # Rate limit: 3/min per IP, 2/hour per email
+    # Per-IP only: 2 attempts per 60s. Per-email removed for symmetry with /checkout.
     await enforce_rate_limit(
         redis,
         endpoint="email-only",
         key=client_host or "unknown",
-        max_per_window=3,
-        window_seconds=60,
-    )
-    await enforce_rate_limit(
-        redis,
-        endpoint="email-only-email",
-        key=form.email,
         max_per_window=2,
-        window_seconds=3600,
+        window_seconds=60,
     )
 
     ok = await verify_turnstile(form.turnstile_token, client_host)

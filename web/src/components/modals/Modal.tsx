@@ -108,6 +108,9 @@ function PayForm() {
           return;
         }
         setServerError(copy.modal.pay.alreadyPaid);
+      } else if (err instanceof ApiError && err.status === 429) {
+        // Rate-limited — surface backend's user-friendly detail message
+        setServerError(err.message || copy.modal.pay.errorGeneric);
       } else {
         setServerError(copy.modal.pay.errorGeneric);
       }

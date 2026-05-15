@@ -39,6 +39,7 @@ export interface MeResponse {
   paid_at?: string;
   refund_deadline_at?: string;
   refunded_at?: string;
+  survey_submitted_at?: string;
 }
 
 export interface StatsResponse {
@@ -98,6 +99,18 @@ export const api = {
     fetcher<{ status: "refunded" | "error"; message?: string }>(
       `/api/me/refund?token=${encodeURIComponent(token)}`,
       { method: "POST" },
+    ),
+
+  submitSurvey: (
+    token: string,
+    payload: { factors: string[]; other_text: string },
+  ) =>
+    fetcher<{ status: "saved" | "already_submitted" }>(
+      `/api/me/survey?token=${encodeURIComponent(token)}`,
+      {
+        method: "POST",
+        body: JSON.stringify(payload),
+      },
     ),
 
   getStats: () => fetcher<StatsResponse>("/api/stats"),

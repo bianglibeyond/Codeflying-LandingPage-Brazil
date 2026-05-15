@@ -1,4 +1,4 @@
-"""Dashboard endpoints — /api/me, /api/me/refund."""
+"""Dashboard endpoints — /api/me, /api/me/refund, /api/me/survey."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ import json
 import time
 
 from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel, Field
 
 from ..auth import verify_token
 from ..redis_client import DASHBOARD_CACHE_TTL, Keys, get_redis
@@ -14,6 +15,11 @@ from ..stripe_client import refund_payment_intent, stripe_client, update_custome
 
 
 router = APIRouter(prefix="/api/me", tags=["dashboard"])
+
+
+class SurveyPayload(BaseModel):
+    factors: list[str] = Field(default_factory=list)
+    other_text: str = ""
 
 
 @router.get("", response_model=MeResponse)
@@ -36,7 +42,48 @@ async def me(token: str = Query(...)):
         paid_at=md.get("paid_at") or None,
         refund_deadline_at=md.get("refund_deadline_at") or None,
         refunded_at=md.get("refunded_at") or None,
+        survey_submitted_at=md.get("survey_submitted_at") or None,
     )
+
+
+@router.post("/survey")
+async def submit_survey(
+    payload: SurveyPayload,
+    token: str = Query(...),
+):
+    """Save post-payment survey responses to Stripe Customer metadata."""
+    customer_id = verify_token(token)
+    if not customer_id:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+    s = stripe_client()
+    customer = s.Customer.retrieve(customer_id)
+    md = customer.metadata.to_dict() if customer.metadata else {}
+
+    # Idempotency: if already submitted, just acknowledge
+    if md.get("survey_submitted_at"):
+        return {"status": "already_submitted"}
+
+    # Sanitize factors — only allow known values + truncate length
+    allowed = {"language", "telegram", "whatsapp", "pricing", "other"}
+    factors = [f for f in payload.factors if f in allowed][:10]
+    other_text = (payload.other_text or "")[:500]  # Stripe metadata max 500 chars/value
+
+    update_customer_status(
+        customer_id,
+        new_status=md.get("status", "paid"),  # don't change status
+        extra={
+            "survey_factors": ",".join(factors),
+            "survey_other": other_text,
+            "survey_submitted_at": _iso(int(time.time())),
+        },
+    )
+
+    # Invalidate dashboard cache
+    redis = get_redis()
+    await redis.delete(Keys.dashboard_cache(customer_id))
+
+    return {"status": "saved"}
 
 
 @router.post("/refund", response_model=RefundResponse)

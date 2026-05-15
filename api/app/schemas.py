@@ -39,6 +39,7 @@ class MeResponse(BaseModel):
     paid_at: str | None = None
     refund_deadline_at: str | None = None
     refunded_at: str | None = None
+    survey_submitted_at: str | None = None
 
 
 class StatsResponse(BaseModel):

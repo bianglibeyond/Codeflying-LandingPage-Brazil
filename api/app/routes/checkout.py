@@ -39,20 +39,14 @@ async def create_checkout(form: LeadForm, request: Request):
     redis = get_redis()
     client_host = request.client.host if request.client else ""
 
-    # Rate limit: 3/min per IP, 2/hour per email
+    # Per-IP rate limit: 2 attempts per 60s (allows 1 retry within a minute)
+    # Per-email limit removed — too restrictive for legitimate retries (typos, etc).
     await enforce_rate_limit(
         redis,
         endpoint="checkout",
         key=client_host or "unknown",
-        max_per_window=5,
+        max_per_window=2,
         window_seconds=60,
-    )
-    await enforce_rate_limit(
-        redis,
-        endpoint="checkout-email",
-        key=form.email,
-        max_per_window=3,
-        window_seconds=3600,
     )
 
     # Bot guard

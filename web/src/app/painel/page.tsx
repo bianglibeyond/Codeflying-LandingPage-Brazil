@@ -2,7 +2,6 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Copy, Check } from "lucide-react";
 import Link from "next/link";
 import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/Button";
@@ -151,11 +150,6 @@ function PaidDashboard({
     ? Math.max(0, Math.ceil((new Date(data.refund_deadline_at).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
     : 0;
 
-  const referralLink =
-    typeof window !== "undefined" && data.referral_code
-      ? `${window.location.origin}/?ref=${data.referral_code}`
-      : "";
-
   return (
     <Shell>
       {welcome && (
@@ -164,6 +158,10 @@ function PaidDashboard({
             {copy.painel.welcome.replace("{firstName}", firstName)}
           </h1>
         </header>
+      )}
+
+      {!data.survey_submitted_at && data.status === "paid" && (
+        <SurveyCard token={token} />
       )}
 
       <p className="text-body-sm text-muted">{copy.painel.bookmark}</p>
@@ -184,16 +182,6 @@ function PaidDashboard({
           {formatBRL((data.credit_brl_cents ?? 5000) / 100)}
         </p>
         <p className="text-body-sm text-muted">{copy.painel.creditValue}</p>
-      </Card>
-
-      <Card>
-        <Label>{copy.painel.referralLabel}</Label>
-        {data.referral_code ? (
-          <CopyField text={referralLink} />
-        ) : (
-          <p className="text-body-sm text-muted">Aguardando confirmação...</p>
-        )}
-        <p className="text-body-sm text-muted">{copy.painel.referralHelp}</p>
       </Card>
 
       <Card>
@@ -222,11 +210,6 @@ function PaidDashboard({
             </li>
           ))}
         </ul>
-      </Card>
-
-      <Card>
-        <Label>{copy.painel.shareLabel}</Label>
-        <ShareButtons link={referralLink} />
       </Card>
 
       {refundOpen && (
@@ -281,58 +264,95 @@ function Label({ children }: { children: React.ReactNode }) {
   );
 }
 
-function CopyField({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
-  return (
-    <div className="flex items-center gap-2 rounded-sm bg-warm/50 border border-hairline px-3 py-2">
-      <code className="flex-1 truncate text-body-sm text-ink">{text}</code>
-      <button
-        type="button"
-        onClick={() => {
-          navigator.clipboard.writeText(text);
-          setCopied(true);
-          window.setTimeout(() => setCopied(false), 2000);
-        }}
-        aria-label="Copiar"
-        className="rounded-sm p-1.5 text-muted hover:text-ink hover:bg-white transition-colors"
-      >
-        {copied ? <Check size={16} /> : <Copy size={16} />}
-      </button>
-    </div>
-  );
-}
+function SurveyCard({ token }: { token: string }) {
+  const [factors, setFactors] = useState<string[]>([]);
+  const [otherText, setOtherText] = useState("");
+  const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-function ShareButtons({ link }: { link: string }) {
-  if (!link) return null;
-  const message = encodeURIComponent(
-    copy.shareTemplates.referralMessage.replace("{link}", link),
-  );
+  const toggle = (value: string) => {
+    setFactors((prev) =>
+      prev.includes(value) ? prev.filter((f) => f !== value) : [...prev, value],
+    );
+  };
+
+  const submit = async () => {
+    if (factors.length === 0) return;
+    setState("loading");
+    try {
+      await api.submitSurvey(token, {
+        factors,
+        other_text: factors.includes("other") ? otherText : "",
+      });
+      setState("done");
+    } catch {
+      setErrorMsg(copy.painel.survey.errorGeneric);
+      setState("error");
+    }
+  };
+
+  if (state === "done") {
+    return (
+      <div className="rounded-md bg-coral/5 border border-coral/20 p-5">
+        <p className="text-body text-coral font-semibold">
+          ✓ {copy.painel.survey.thanks}
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-wrap gap-2 mt-1">
-      <a
-        href={`https://wa.me/?text=${message}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-full bg-[#25D366]/10 text-[#25D366] px-4 py-2 text-body-sm font-semibold hover:bg-[#25D366]/20 transition-colors"
+    <div className="rounded-md bg-coral/5 border border-coral/30 p-5 sm:p-6 flex flex-col gap-4">
+      <div className="flex flex-col gap-1">
+        <h3 className="text-h3 text-ink">{copy.painel.survey.title}</h3>
+        <p className="text-body-sm text-muted">{copy.painel.survey.sub}</p>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        {copy.painel.survey.factors.map((f) => (
+          <label
+            key={f.value}
+            className="flex items-start gap-3 cursor-pointer rounded-sm hover:bg-white/50 -mx-2 px-2 py-1.5 transition-colors"
+          >
+            <input
+              type="checkbox"
+              checked={factors.includes(f.value)}
+              onChange={() => toggle(f.value)}
+              className="mt-1 size-4 rounded-sm border-hairline accent-coral shrink-0"
+            />
+            <span className="text-body text-ink">{f.label}</span>
+          </label>
+        ))}
+      </div>
+
+      {factors.includes("other") && (
+        <textarea
+          value={otherText}
+          onChange={(e) => setOtherText(e.target.value)}
+          placeholder={copy.painel.survey.otherPlaceholder}
+          rows={3}
+          className="w-full rounded-sm border border-hairline bg-white px-3 py-2.5 text-body placeholder:text-muted focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20 resize-none"
+          maxLength={500}
+        />
+      )}
+
+      {errorMsg && (
+        <p className="text-body-sm text-coral" role="alert">
+          {errorMsg}
+        </p>
+      )}
+
+      <Button
+        type="button"
+        variant="primary"
+        onClick={submit}
+        disabled={state === "loading" || factors.length === 0}
+        className="self-start"
       >
-        WhatsApp
-      </a>
-      <a
-        href={`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${message}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-full bg-telegram/10 text-telegram px-4 py-2 text-body-sm font-semibold hover:bg-telegram/20 transition-colors"
-      >
-        Telegram
-      </a>
-      <a
-        href={`https://x.com/intent/tweet?text=${message}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-full bg-ink/10 text-ink px-4 py-2 text-body-sm font-semibold hover:bg-ink/20 transition-colors"
-      >
-        X / Twitter
-      </a>
+        {state === "loading"
+          ? copy.painel.survey.submitLoading
+          : copy.painel.survey.submit}
+      </Button>
     </div>
   );
 }
