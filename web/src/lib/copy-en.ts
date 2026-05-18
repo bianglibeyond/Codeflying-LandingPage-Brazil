@@ -169,10 +169,10 @@ export const copy = {
   pricing: {
     h2: "For those who join first.",
     planLabel: "Early Access plan (first 100)",
-    priceLaunch: "R$ 29",
-    priceLaunchUnit: "/mo",
-    pricePostLaunch: "R$ 49",
-    pricePostLaunchSuffix: "after public launch",
+    priceLaunch: "R$ 9.90",
+    priceLaunchUnit: "today (deposit)",
+    creditReturn: "→ R$ 50 in launch credit (5× value)",
+    subscriptionNote: "Plus: R$ 29/mo subscription locked in — R$ 49/mo after public launch.",
     bullets: [
       "Website + Telegram Mini App + WhatsApp Flow",
       "Zero sales commission",

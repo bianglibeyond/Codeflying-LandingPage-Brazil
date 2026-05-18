@@ -208,10 +208,10 @@ export const copy = {
   pricing: {
     h2: "Pra quem entra primeiro.",
     planLabel: "Plano Early Access (primeiros 100)",
-    priceLaunch: "R$ 29",
-    priceLaunchUnit: "/mês",
-    pricePostLaunch: "R$ 49",
-    pricePostLaunchSuffix: "depois do lançamento",
+    priceLaunch: "R$ 9,90",
+    priceLaunchUnit: "hoje (depósito)",
+    creditReturn: "→ R$ 50 em crédito no lançamento (5× de valor)",
+    subscriptionNote: "E mais: mensalidade R$ 29 garantida — depois do lançamento sobe pra R$ 49.",
     bullets: [
       "Website + Telegram Mini App + WhatsApp Flow",
       "Sem comissão sobre venda",

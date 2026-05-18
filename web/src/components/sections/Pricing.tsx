@@ -64,9 +64,11 @@ export function Pricing() {
               </span>
               <span className="text-h4 text-muted">{copy.pricing.priceLaunchUnit}</span>
             </div>
-            <p className="text-body-sm text-muted">
-              <s className="text-muted/70">{copy.pricing.pricePostLaunch}/mês</s>{" "}
-              {copy.pricing.pricePostLaunchSuffix}
+            <p className="text-body text-coral font-semibold">
+              {copy.pricing.creditReturn}
+            </p>
+            <p className="text-body-sm text-muted max-w-md">
+              {copy.pricing.subscriptionNote}
             </p>
           </div>
 
@@ -89,7 +91,6 @@ export function Pricing() {
                   layout="stacked"
                   align="center"
                   primaryLabel={copy.pricing.ctaPrimary}
-                  valueCallout={copy.pricing.ctaValueCallout}
                   hidePaymentNote
                   className="w-full"
                 />
