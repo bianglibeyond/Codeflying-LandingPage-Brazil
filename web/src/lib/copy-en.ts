@@ -172,7 +172,6 @@ export const copy = {
     priceLaunch: "R$ 9.90",
     priceLaunchUnit: "today (deposit)",
     creditReturn: "→ R$ 50 in launch credit (5× value)",
-    subscriptionNote: "Plus: R$ 29/mo subscription locked in — R$ 49/mo after public launch.",
     bullets: [
       "Website + Telegram Mini App + WhatsApp Flow",
       "Zero sales commission",

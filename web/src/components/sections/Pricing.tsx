@@ -67,9 +67,6 @@ export function Pricing() {
             <p className="text-body text-coral font-semibold">
               {copy.pricing.creditReturn}
             </p>
-            <p className="text-body-sm text-muted max-w-md">
-              {copy.pricing.subscriptionNote}
-            </p>
           </div>
 
           <ul className="mt-8 flex flex-col gap-3 max-w-md mx-auto">
