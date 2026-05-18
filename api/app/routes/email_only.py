@@ -32,12 +32,13 @@ async def email_only(form: LeadForm, request: Request):
     redis = get_redis()
     client_host = request.client.host if request.client else ""
 
-    # Per-IP only: 2 attempts per 60s. Per-email removed for symmetry with /checkout.
+    # Per-IP: 5 attempts per 60s. Email-only is the free fallback path —
+    # legit users with typos shouldn't get locked out.
     await enforce_rate_limit(
         redis,
         endpoint="email-only",
         key=client_host or "unknown",
-        max_per_window=2,
+        max_per_window=5,
         window_seconds=60,
     )
 

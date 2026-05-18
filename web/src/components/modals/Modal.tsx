@@ -239,8 +239,12 @@ function EmailForm() {
           ? copy.modal.emailOnly.alreadyEmailOnly
           : copy.modal.emailOnly.confirmation,
       );
-    } catch {
-      setServerError(copy.modal.emailOnly.errorGeneric);
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 429) {
+        setServerError(err.message || copy.modal.emailOnly.errorGeneric);
+      } else {
+        setServerError(copy.modal.emailOnly.errorGeneric);
+      }
     } finally {
       setSubmitting(false);
     }
