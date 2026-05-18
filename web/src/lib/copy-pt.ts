@@ -354,7 +354,7 @@ export const copy = {
       submit: "Me avisar quando lançar",
       submitLoading: "Salvando...",
       confirmation:
-        "Beleza! Te avisaremos pelo WhatsApp e por aqui quando lançar. Enquanto isso, segue a gente no Instagram: @codeflying",
+        "Beleza! Te avisaremos pelo WhatsApp e por aqui quando lançar.",
       errorGeneric: "Tivemos um problema. Tente de novo.",
       alreadyEmailOnly:
         "Você já está na nossa lista! Te avisaremos quando lançar.",

@@ -311,7 +311,7 @@ export const copy = {
       submit: "Notify me when it launches",
       submitLoading: "Saving...",
       confirmation:
-        "All set! We'll notify you via WhatsApp and here when we launch. In the meantime, follow us on Instagram: @codeflying",
+        "All set! We'll notify you via WhatsApp and here when we launch.",
       errorGeneric: "Something went wrong. Try again.",
       alreadyEmailOnly:
         "You're already on our list! We'll notify you when we launch.",
