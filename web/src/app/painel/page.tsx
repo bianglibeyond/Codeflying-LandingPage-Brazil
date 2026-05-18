@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { api, type MeResponse } from "@/lib/api";
 import { copy } from "@/lib/copy";
 import { formatBRL, formatBRDate } from "@/lib/utils";
-import { track } from "@/lib/analytics";
+import { track, identify } from "@/lib/analytics";
 import { confettiColors, prefersReducedMotion } from "@/lib/design";
 
 export default function PainelPage() {
@@ -25,6 +25,23 @@ function LoadingShell() {
       <p className="text-body-lg text-muted">{copy.painel.loading}</p>
     </div>
   );
+}
+
+/**
+ * The dashboard token is `base64url(customer_id).hmac`. We can derive the
+ * Stripe customer_id client-side without trusting it (the API still verifies
+ * the HMAC). This is used purely to attach analytics events to a stable id.
+ */
+function decodeCustomerIdFromToken(token: string | null): string {
+  if (!token) return "";
+  try {
+    const [encoded] = token.split(".");
+    if (!encoded) return "";
+    const b64 = encoded.replace(/-/g, "+").replace(/_/g, "/");
+    return atob(b64);
+  } catch {
+    return "";
+  }
 }
 
 /**
@@ -48,6 +65,8 @@ function PainelInner() {
       return;
     }
     let cancelled = false;
+    const customerId = decodeCustomerIdFromToken(token);
+    if (customerId) identify(customerId);
     api
       .getMe(token)
       .then((resp) => {
