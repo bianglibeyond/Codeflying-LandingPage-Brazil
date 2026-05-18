@@ -93,14 +93,15 @@ export const copy = {
     caption:
       "If you create content, sell info-products, or charge monthly — there's a template ready.",
     cards: [
-      { id: "coach", title: "Fitness coach", line: "SEO site + VIP bot delivering workouts" },
-      { id: "course", title: "Course seller", line: "Landing page + VIP bot delivering modules" },
-      { id: "nutri", title: "Nutritionist", line: "Online booking + bot delivering meal plans" },
-      { id: "mentor", title: "Mentor / consultant", line: "Site + VIP community + recurring billing" },
+      { id: "coach", title: "Fitness coach", line: "Website + WhatsApp Flow: bookings, workout delivery, reminders", channel: "wa" },
+      { id: "course", title: "Course seller", line: "Landing page + Telegram Mini App delivering modules + VIP group", channel: "tg" },
+      { id: "nutri", title: "Nutritionist", line: "Website + WhatsApp Flow: bookings, meal plans, check-ins", channel: "wa" },
+      { id: "mentor", title: "Mentor / consultant", line: "Website + WhatsApp Flow: scheduling, recurring billing, ongoing support", channel: "wa" },
     ],
     cardLink: "See template →",
     sitePreviewLabel: "Website",
     tgPreviewLabel: "Telegram Mini App",
+    waPreviewLabel: "WhatsApp Flow",
   },
 
   pixComparison: {

@@ -101,27 +101,32 @@ export const copy = {
       {
         id: "coach",
         title: "Coach fitness",
-        line: "Site SEO + bot VIP entregando treino",
+        line: "Site + WhatsApp Flow: agendamento, entrega de treino, lembretes",
+        channel: "wa",
       },
       {
         id: "course",
         title: "Vendedor de cursos",
-        line: "Página de captura + bot VIP entregando módulos",
+        line: "Página de captura + Telegram Mini App entregando módulos + grupo VIP",
+        channel: "tg",
       },
       {
         id: "nutri",
         title: "Nutricionista",
-        line: "Agenda online + bot entregando plano",
+        line: "Site + WhatsApp Flow: agenda, plano alimentar, check-ins",
+        channel: "wa",
       },
       {
         id: "mentor",
         title: "Mentor / consultor",
-        line: "Site + comunidade VIP + cobrança recorrente",
+        line: "Site + WhatsApp Flow: agendamento, cobrança recorrente, suporte contínuo",
+        channel: "wa",
       },
     ],
     cardLink: "Ver template →",
     sitePreviewLabel: "Website",
     tgPreviewLabel: "Telegram Mini App",
+    waPreviewLabel: "WhatsApp Flow",
   },
 
   pixComparison: {

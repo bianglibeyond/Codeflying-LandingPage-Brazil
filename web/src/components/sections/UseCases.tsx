@@ -24,32 +24,41 @@ export function UseCases() {
         </header>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-          {copy.useCases.cards.map((card) => (
-            <article
-              key={card.id}
-              className="flex flex-col gap-4 rounded-md bg-white p-5 sm:p-6 border border-hairline transition-shadow duration-150 hover:shadow-md"
-            >
-              {/* Stacked mockup pair: site + TG */}
-              <div className="flex flex-col gap-2">
-                <div className="aspect-[16/10] rounded-sm bg-coral/8 border border-coral/15 flex items-center justify-center text-caption text-coral/80">
-                  {copy.useCases.sitePreviewLabel}
-                </div>
-                <div className="aspect-[16/10] rounded-sm bg-telegram/8 border border-telegram/15 flex items-center justify-center text-caption text-telegram/80">
-                  {copy.useCases.tgPreviewLabel}
-                </div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <h3 className="text-h4 text-ink">{card.title}</h3>
-                <p className="text-body-sm text-body">{card.line}</p>
-              </div>
-              <a
-                href={`#pricing`}
-                className="text-body-sm text-coral hover:underline"
+          {copy.useCases.cards.map((card) => {
+            const isWa = card.channel === "wa";
+            return (
+              <article
+                key={card.id}
+                className="flex flex-col gap-4 rounded-md bg-white p-5 sm:p-6 border border-hairline transition-shadow duration-150 hover:shadow-md"
               >
-                {copy.useCases.cardLink}
-              </a>
-            </article>
-          ))}
+                {/* Stacked mockup pair: site + (Telegram or WhatsApp) */}
+                <div className="flex flex-col gap-2">
+                  <div className="aspect-[16/10] rounded-sm bg-coral/8 border border-coral/15 flex items-center justify-center text-caption text-coral/80">
+                    {copy.useCases.sitePreviewLabel}
+                  </div>
+                  {isWa ? (
+                    <div className="aspect-[16/10] rounded-sm bg-[#25D366]/10 border border-[#25D366]/25 flex items-center justify-center text-caption text-[#1FA851]">
+                      {copy.useCases.waPreviewLabel}
+                    </div>
+                  ) : (
+                    <div className="aspect-[16/10] rounded-sm bg-telegram/8 border border-telegram/15 flex items-center justify-center text-caption text-telegram/80">
+                      {copy.useCases.tgPreviewLabel}
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-col gap-1">
+                  <h3 className="text-h4 text-ink">{card.title}</h3>
+                  <p className="text-body-sm text-body">{card.line}</p>
+                </div>
+                <a
+                  href={`#pricing`}
+                  className="text-body-sm text-coral hover:underline"
+                >
+                  {copy.useCases.cardLink}
+                </a>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
