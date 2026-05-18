@@ -106,7 +106,7 @@ function Panel({
           <li key={i} className="flex items-start gap-2">
             <span
               aria-hidden
-              className={cn("mt-1 inline-block size-1.5 rounded-full", dotColor)}
+              className={cn("mt-2 inline-block size-1.5 rounded-full shrink-0", dotColor)}
             />
             <span>{bullet}</span>
           </li>
