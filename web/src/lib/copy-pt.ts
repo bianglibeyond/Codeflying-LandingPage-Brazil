@@ -123,7 +123,6 @@ export const copy = {
         channel: "wa",
       },
     ],
-    cardLink: "Ver template →",
     sitePreviewLabel: "Website",
     tgPreviewLabel: "Telegram Mini App",
     waPreviewLabel: "WhatsApp Flow",

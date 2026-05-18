@@ -98,7 +98,6 @@ export const copy = {
       { id: "nutri", title: "Nutritionist", line: "Website + WhatsApp Flow: bookings, meal plans, check-ins", channel: "wa" },
       { id: "mentor", title: "Mentor / consultant", line: "Website + WhatsApp Flow: scheduling, recurring billing, ongoing support", channel: "wa" },
     ],
-    cardLink: "See template →",
     sitePreviewLabel: "Website",
     tgPreviewLabel: "Telegram Mini App",
     waPreviewLabel: "WhatsApp Flow",

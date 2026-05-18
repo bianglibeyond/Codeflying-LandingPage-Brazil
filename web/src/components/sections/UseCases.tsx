@@ -50,12 +50,6 @@ export function UseCases() {
                   <h3 className="text-h4 text-ink">{card.title}</h3>
                   <p className="text-body-sm text-body">{card.line}</p>
                 </div>
-                <a
-                  href={`#pricing`}
-                  className="text-body-sm text-coral hover:underline"
-                >
-                  {copy.useCases.cardLink}
-                </a>
               </article>
             );
           })}
