@@ -23,9 +23,9 @@ export const copy = {
 
   hero: {
     eyebrow: "Pra criadores e SMBs brasileiros, em português. Cartão hoje, Pix em breve.",
-    h1Desktop: ["Crie seu site + Telegram + WhatsApp", "em 10 minutos."],
+    h1Desktop: ["Crie seu Website + Telegram Mini App + WhatsApp Flow", "em 10 minutos."],
     h1Highlight: "em 10 minutos",
-    h1Mobile: ["Site + Telegram + WhatsApp", "em 10 minutos."],
+    h1Mobile: ["Website + Telegram Mini App + WhatsApp Flow", "em 10 minutos."],
     h1MobileHighlight: "em 10 minutos",
     subDesktop:
       "Descreva sua ideia pra IA. A gente entrega Website + Telegram Mini App + WhatsApp Flow + checkout — tudo de um prompt. R$ 29/mês fixo. Sem comissão sobre venda.",
@@ -61,6 +61,7 @@ export const copy = {
       b2b: "Funil B2B + follow-up no WhatsApp",
     },
     ctaPrimary: "Garantir minha vaga — R$ 9,90",
+    ctaValueCallout: "R$ 9,90 hoje → R$ 50 em crédito no lançamento (5× de valor)",
     ctaPaymentNote: "Pagamento via cartão (Stripe). Pix em Q3 2026.",
     ctaSecondary: "Só quero ser avisado quando lançar (grátis)",
     ctaTertiary: "Ver demo (90s) ↓",
@@ -229,6 +230,7 @@ export const copy = {
       "LGPD compliant by default",
     ],
     ctaPrimary: "Garantir minha vaga — R$ 9,90",
+    ctaValueCallout: "R$ 9,90 hoje → R$ 50 em crédito no lançamento (5× de valor)",
     creditNote: "Vira R$ 50 de crédito quando lançarmos",
     paymentNote: "Pagamento via cartão (Stripe). Pix em Q3 2026.",
     refundNote: "Reembolso integral em 7 dias se desistir.",
@@ -295,6 +297,7 @@ export const copy = {
   finalCta: {
     h2: "Só 100 vagas. R$ 9,90 garante a sua.",
     ctaPrimary: "Garantir minha vaga — R$ 9,90",
+    ctaValueCallout: "R$ 9,90 hoje → R$ 50 em crédito no lançamento (5× de valor)",
     paymentNote: "Pagamento via cartão (Stripe). Pix em Q3 2026.",
     ctaSecondary: "Só quero ser avisado quando lançar (grátis)",
   },
@@ -487,7 +490,7 @@ export const copy = {
 
   livePreview: {
     captionDesktop: "Um prompt. Vários canais. Sincronizados.",
-    captionMobile: "Um prompt → site + Telegram + WhatsApp, sincronizados.",
+    captionMobile: "Um prompt → Website + Telegram Mini App + WhatsApp Flow, sincronizados.",
     browserUrl: "codeflying.app/seu-app",
     miniAppBuyLabel: "Comprar",
   },

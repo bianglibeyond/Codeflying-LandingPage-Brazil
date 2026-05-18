@@ -22,6 +22,7 @@ export function FinalCta() {
           source="final"
           align="center"
           primaryLabel={copy.finalCta.ctaPrimary}
+          valueCallout={copy.finalCta.ctaValueCallout}
           hidePaymentNote
         />
         <p className="text-caption text-white/60">{copy.finalCta.paymentNote}</p>

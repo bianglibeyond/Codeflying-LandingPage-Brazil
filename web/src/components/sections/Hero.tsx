@@ -96,7 +96,7 @@ export function Hero() {
             </div>
 
             {/* Dual CTAs */}
-            <DualCta source="hero" />
+            <DualCta source="hero" valueCallout={copy.hero.ctaValueCallout} />
 
             {/* Tertiary text link to demo */}
             <a

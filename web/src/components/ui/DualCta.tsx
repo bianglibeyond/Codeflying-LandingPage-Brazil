@@ -24,13 +24,15 @@ interface DualCtaProps {
   primaryLabel?: string;
   /** Hide the payment note text under primary (sometimes redundant). */
   hidePaymentNote?: boolean;
+  /** Value-prop callout shown as a pill above the primary button (e.g. "R$9.90 → R$50 credit"). */
+  valueCallout?: string;
   className?: string;
 }
 
 /**
  * Dual-CTA pattern (PLAN §4 hero, §4 pricing, §4 final-CTA).
  * Primary: pay (R$ 9,90 → Stripe). Secondary: free email-only.
- * Visible together at every CTA location.
+ * Both rendered as full buttons so the free option is unmistakable.
  */
 export function DualCta({
   source,
@@ -40,6 +42,7 @@ export function DualCta({
   prefillPrompt,
   primaryLabel,
   hidePaymentNote = false,
+  valueCallout,
   className,
 }: DualCtaProps) {
   const { openPay, openEmail } = useModal();
@@ -67,6 +70,18 @@ export function DualCta({
         className,
       )}
     >
+      {valueCallout && (
+        <span
+          className={cn(
+            "inline-flex items-center rounded-full bg-coral/10 px-3 py-1.5",
+            "text-caption font-semibold text-coral tabular-nums",
+            "ring-1 ring-coral/20",
+          )}
+        >
+          {valueCallout}
+        </span>
+      )}
+
       <Button
         type="button"
         variant={primaryVariant}
@@ -94,17 +109,19 @@ export function DualCta({
         </p>
       )}
 
-      <button
+      <Button
         type="button"
+        variant="secondary"
+        size="lg"
         onClick={handleEmail}
-        className={cn(
-          "text-body-sm text-muted underline decoration-hairline underline-offset-4",
-          "hover:text-ink hover:decoration-ink transition-colors duration-150",
-          layout === "stacked" ? "mt-1" : "",
-        )}
+        className={
+          layout === "stacked"
+            ? "w-full sm:w-auto"
+            : ""
+        }
       >
-        {copy.hero.ctaSecondary} →
-      </button>
+        {copy.hero.ctaSecondary}
+      </Button>
     </div>
   );
 }

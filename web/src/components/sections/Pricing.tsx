@@ -89,12 +89,10 @@ export function Pricing() {
                   layout="stacked"
                   align="center"
                   primaryLabel={copy.pricing.ctaPrimary}
+                  valueCallout={copy.pricing.ctaValueCallout}
                   hidePaymentNote
                   className="w-full"
                 />
-                <p className="text-caption text-coral text-center -mt-2">
-                  {copy.pricing.creditNote}
-                </p>
                 <p className="text-caption text-muted text-center">
                   {copy.pricing.paymentNote}
                 </p>
