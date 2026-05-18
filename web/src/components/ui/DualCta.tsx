@@ -114,11 +114,12 @@ export function DualCta({
         variant="secondary"
         size="lg"
         onClick={handleEmail}
-        className={
-          layout === "stacked"
-            ? "w-full sm:w-auto"
-            : ""
-        }
+        className={cn(
+          // Force ink text — parent sections (e.g. dark FinalCta) inherit
+          // text-white and can override the variant's text-ink. !important wins.
+          "!text-ink",
+          layout === "stacked" ? "w-full sm:w-auto" : "",
+        )}
       >
         {copy.hero.ctaSecondary}
       </Button>
