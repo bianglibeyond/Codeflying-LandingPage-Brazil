@@ -317,6 +317,21 @@ export const copy = {
         "You're already on our list! We'll notify you when we launch.",
       alreadyPaidUpsell: "You're already in the first batch! See your dashboard →",
       doneTitle: "All set!",
+      survey: {
+        title: "Quick question — what made you sign up?",
+        sub: "Tick any that pulled you in. Helps us focus on what matters.",
+        factors: [
+          { value: "language", label: "It's in Portuguese / Brazilian-first" },
+          { value: "whatsapp", label: "WhatsApp Mini App is included" },
+          { value: "telegram", label: "Telegram Mini App is included" },
+          { value: "other", label: "Other (please specify)" },
+        ],
+        otherPlaceholder: "Tell us in your own words...",
+        submit: "Submit",
+        submitLoading: "Saving...",
+        thanks: "Thanks! That helps a lot.",
+        errorGeneric: "Couldn't save. Try again.",
+      },
     },
     common: {
       close: "Close",

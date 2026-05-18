@@ -209,6 +209,7 @@ function EmailForm() {
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [surveyToken, setSurveyToken] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string>("");
 
   const {
@@ -234,6 +235,17 @@ function EmailForm() {
         window.location.href = resp.dashboard_url;
         return;
       }
+      // Pull the auth token out of the dashboard_url so the success-state
+      // survey can authenticate against /api/me/survey.
+      if (resp.dashboard_url) {
+        try {
+          const u = new URL(resp.dashboard_url, window.location.origin);
+          const t = u.searchParams.get("token");
+          if (t) setSurveyToken(t);
+        } catch {
+          /* malformed URL — survey just won't render */
+        }
+      }
       setSuccess(
         resp.status === "already_email_only"
           ? copy.modal.emailOnly.alreadyEmailOnly
@@ -252,14 +264,17 @@ function EmailForm() {
 
   if (success) {
     return (
-      <div className="p-6 sm:p-8 flex flex-col gap-4 text-center">
-        <div className="mx-auto size-12 rounded-full bg-coral/10 flex items-center justify-center text-2xl">
-          ✓
+      <div className="p-6 sm:p-8 flex flex-col gap-5">
+        <div className="text-center flex flex-col items-center gap-3">
+          <div className="size-12 rounded-full bg-coral/10 flex items-center justify-center text-2xl">
+            ✓
+          </div>
+          <h2 id="modal-title" className="text-h3 text-ink">
+            {copy.modal.emailOnly.doneTitle}
+          </h2>
+          <p className="text-body text-body">{success}</p>
         </div>
-        <h2 id="modal-title" className="text-h3 text-ink">
-          {copy.modal.emailOnly.doneTitle}
-        </h2>
-        <p className="text-body text-body">{success}</p>
+        {surveyToken && <EmailOnlySurvey token={surveyToken} />}
       </div>
     );
   }
@@ -343,6 +358,107 @@ function EmailForm() {
         {submitting ? copy.modal.emailOnly.submitLoading : copy.modal.emailOnly.submit}
       </Button>
     </form>
+  );
+}
+
+/**
+ * Post-signup survey shown to free-tier users in the email-only modal's
+ * success state. Asks which factors pulled them in. Optional — closing
+ * the modal without submitting is fine.
+ */
+function EmailOnlySurvey({ token }: { token: string }) {
+  const [factors, setFactors] = useState<string[]>([]);
+  const [otherText, setOtherText] = useState("");
+  const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const toggle = (value: string) => {
+    setFactors((prev) =>
+      prev.includes(value) ? prev.filter((f) => f !== value) : [...prev, value],
+    );
+  };
+
+  const submit = async () => {
+    if (factors.length === 0) return;
+    setState("loading");
+    try {
+      await api.submitSurvey(token, {
+        factors,
+        other_text: factors.includes("other") ? otherText : "",
+      });
+      setState("done");
+    } catch {
+      setErrorMsg(copy.modal.emailOnly.survey.errorGeneric);
+      setState("error");
+    }
+  };
+
+  if (state === "done") {
+    return (
+      <div className="rounded-md bg-coral/5 border border-coral/20 p-4 text-center">
+        <p className="text-body-sm text-coral font-semibold">
+          ✓ {copy.modal.emailOnly.survey.thanks}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-md bg-coral/5 border border-coral/20 p-5 flex flex-col gap-3">
+      <div className="flex flex-col gap-0.5">
+        <h3 className="text-body-lg font-semibold text-ink">
+          {copy.modal.emailOnly.survey.title}
+        </h3>
+        <p className="text-body-sm text-muted">{copy.modal.emailOnly.survey.sub}</p>
+      </div>
+
+      <div className="flex flex-col gap-1">
+        {copy.modal.emailOnly.survey.factors.map((f) => (
+          <label
+            key={f.value}
+            className="flex items-start gap-3 cursor-pointer rounded-sm hover:bg-white/50 -mx-2 px-2 py-1.5 transition-colors"
+          >
+            <input
+              type="checkbox"
+              checked={factors.includes(f.value)}
+              onChange={() => toggle(f.value)}
+              className="mt-1 size-4 rounded-sm border-hairline accent-coral shrink-0"
+            />
+            <span className="text-body-sm text-ink">{f.label}</span>
+          </label>
+        ))}
+      </div>
+
+      {factors.includes("other") && (
+        <textarea
+          value={otherText}
+          onChange={(e) => setOtherText(e.target.value)}
+          placeholder={copy.modal.emailOnly.survey.otherPlaceholder}
+          rows={3}
+          className="w-full rounded-sm border border-hairline bg-white px-3 py-2 text-body-sm placeholder:text-muted focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20 resize-none"
+          maxLength={500}
+        />
+      )}
+
+      {errorMsg && (
+        <p className="text-body-sm text-coral" role="alert">
+          {errorMsg}
+        </p>
+      )}
+
+      <Button
+        type="button"
+        variant="primary"
+        size="sm"
+        onClick={submit}
+        disabled={state === "loading" || factors.length === 0}
+        className="self-start"
+      >
+        {state === "loading"
+          ? copy.modal.emailOnly.survey.submitLoading
+          : copy.modal.emailOnly.survey.submit}
+      </Button>
+    </div>
   );
 }
 

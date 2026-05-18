@@ -55,9 +55,14 @@ async def email_only(form: LeadForm, request: Request):
                 dashboard_url=dashboard_url(existing.id),
             )
         # Already in our list (any non-paid status) — idempotent ack
-        return EmailOnlyResponse(status="already_email_only")
+        # but still hand back a dashboard URL so they land on the soft
+        # dashboard (spots remaining + upsell) instead of nowhere.
+        return EmailOnlyResponse(
+            status="already_email_only",
+            dashboard_url=dashboard_url(existing.id),
+        )
 
-    create_customer(
+    customer = create_customer(
         email=form.email,
         name=form.name,
         whatsapp=form.whatsapp,
@@ -70,4 +75,7 @@ async def email_only(form: LeadForm, request: Request):
         utm_term=form.utm_term,
         ip_country=request.headers.get("cf-ipcountry", ""),
     )
-    return EmailOnlyResponse(status="email_only")
+    return EmailOnlyResponse(
+        status="email_only",
+        dashboard_url=dashboard_url(customer.id),
+    )

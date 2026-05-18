@@ -361,6 +361,21 @@ export const copy = {
       alreadyPaidUpsell:
         "Você já está na primeira leva! Veja sua dashboard →",
       doneTitle: "Pronto!",
+      survey: {
+        title: "Pergunta rápida — o que te fez se cadastrar?",
+        sub: "Marque tudo que te puxou pra cá. Ajuda a gente a focar no que importa.",
+        factors: [
+          { value: "language", label: "É em português / focado no Brasil" },
+          { value: "whatsapp", label: "Inclui WhatsApp Mini App" },
+          { value: "telegram", label: "Inclui Telegram Mini App" },
+          { value: "other", label: "Outro (especifique)" },
+        ],
+        otherPlaceholder: "Conta pra gente em suas palavras...",
+        submit: "Enviar",
+        submitLoading: "Salvando...",
+        thanks: "Valeu! Isso ajuda muito.",
+        errorGeneric: "Não conseguimos salvar. Tente de novo.",
+      },
     },
     common: {
       close: "Fechar",
