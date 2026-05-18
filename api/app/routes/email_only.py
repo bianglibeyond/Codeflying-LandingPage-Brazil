@@ -23,11 +23,15 @@ router = APIRouter(prefix="/api", tags=["leads"])
 async def email_only(form: LeadForm, request: Request):
     """Tier 3 path: capture name + email + WhatsApp without payment.
 
-    State transitions:
-        new email                 → create Customer with status='email_only'
-        status='email_only'       → idempotent, return 'already_email_only'
-        status='intent_pending'   → keep status; user did not complete pay either
-        status='paid'             → return 'already_paid' with dashboard URL
+    State transitions and responses:
+        new email                 → create Customer with status='email_only';
+                                    return status='email_only' + dashboard_url
+        status='email_only'       → idempotent; return 'already_email_only' + dashboard_url
+        status='intent_pending'   → idempotent; return 'already_email_only' + dashboard_url
+        status='paid'             → return 'already_paid' + dashboard_url (frontend redirects)
+
+    dashboard_url is always returned so the frontend can extract the auth
+    token for the post-signup survey on /api/me/survey.
     """
     redis = get_redis()
     client_host = request.client.host if request.client else ""
