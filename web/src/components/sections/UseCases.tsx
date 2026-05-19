@@ -61,8 +61,12 @@ export function UseCases() {
             return (
               <article
                 key={card.id}
-                className="flex flex-col gap-4 rounded-md bg-white p-5 sm:p-6 border border-hairline transition-shadow duration-150 hover:shadow-md"
+                className="flex flex-col gap-5 rounded-md bg-white p-5 sm:p-6 border border-hairline transition-shadow duration-150 hover:shadow-md"
               >
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-h3 text-ink font-bold">{card.title}</h3>
+                  <p className="text-body text-body">{card.line}</p>
+                </div>
                 {/* Stacked screenshot pair: website + WhatsApp/Telegram */}
                 <div className="flex flex-col gap-2">
                   <div className="relative aspect-[3/2] rounded-sm overflow-hidden bg-warm/40 border border-hairline">
@@ -87,10 +91,6 @@ export function UseCases() {
                       />
                     )}
                   </div>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-h4 text-ink">{card.title}</h3>
-                  <p className="text-body-sm text-body">{card.line}</p>
                 </div>
               </article>
             );
