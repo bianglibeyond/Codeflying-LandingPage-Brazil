@@ -185,13 +185,6 @@ export const copy = {
     encountersLabel: "Onde nos encontramos:",
     cards: [
       {
-        flag: "🇨🇳",
-        region: "China",
-        kind: "WeChat Mini App",
-        quote: "Loja de cosméticos: ¥2M+/mês em vendas pelo WeChat Mini App, criado com CodeFlying.",
-        metric: "Equivalente a R$ 1,3M/mês",
-      },
-      {
         flag: "🌐",
         region: "Global",
         kind: "Website",
@@ -204,6 +197,13 @@ export const copy = {
         kind: "Website",
         quote: "Comunidade por assinatura: 12.000+ assinantes pagantes gerenciados por um site gerado pela CodeFlying.",
         metric: "12K assinantes",
+      },
+      {
+        flag: "🇨🇳",
+        region: "China",
+        kind: "WeChat Mini App",
+        quote: "Loja de cosméticos: ¥2M+/mês em vendas pelo WeChat Mini App, criado com CodeFlying.",
+        metric: "Equivalente a R$ 1,3M/mês",
       },
     ],
     screenshotPlaceholder: "[Screenshot]",
