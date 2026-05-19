@@ -272,7 +272,7 @@ export const copy = {
       },
       {
         q: "Como fica a LGPD?",
-        a: "Conformidade por padrão. DPO designado (dpo@codeflying.app). Lista de subprocessadores publicada em /privacidade. Consentimento explícito para cookies e pixels. Direitos do titular em /meus-dados.",
+        a: "Conformidade por padrão. Consentimento explícito para cookies e pixels. Política de privacidade e direitos do titular disponíveis nos links do rodapé.",
       },
       {
         q: "E pra proteger PDF de pirataria?",

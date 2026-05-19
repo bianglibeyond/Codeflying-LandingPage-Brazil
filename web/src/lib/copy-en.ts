@@ -229,7 +229,7 @@ export const copy = {
       },
       {
         q: "What about LGPD?",
-        a: "Compliant by default. Designated DPO (dpo@codeflying.app). Subprocessors list published at /privacidade. Explicit consent for cookies and pixels. Data subject rights at /meus-dados.",
+        a: "Compliant by default. Explicit consent for cookies and pixels. Privacy policy and data subject rights available via the links in our footer.",
       },
       {
         q: "And to protect PDFs from piracy?",
