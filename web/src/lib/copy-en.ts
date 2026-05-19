@@ -148,7 +148,7 @@ export const copy = {
         name: "Sarah K.",
         role: "Online course creator",
         quote:
-          "Built my whole course platform — landing page, Telegram Mini App for module delivery, and checkout — in one afternoon. Two months in, running it without touching the code.",
+          "Built my whole course site — landing page, members area, and checkout — in one afternoon. Two months in, running it without touching the code.",
       },
       {
         initials: "CM",
@@ -157,7 +157,7 @@ export const copy = {
         name: "Carlos M.",
         role: "Fitness coach",
         quote:
-          "Before CodeFlying I was duct-taping Wix, Calendly and Zapier. Now everything's in one place and clients book directly from WhatsApp. Cut my monthly tools bill from $187 to $29.",
+          "Before CodeFlying I was duct-taping Wix, Calendly and Zapier. Now my whole booking site lives in one place. Cut my monthly tools bill from $187 to $29.",
       },
       {
         initials: "YT",

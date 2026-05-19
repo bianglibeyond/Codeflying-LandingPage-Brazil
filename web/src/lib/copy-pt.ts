@@ -191,7 +191,7 @@ export const copy = {
         name: "Sarah K.",
         role: "Criadora de cursos online",
         quote:
-          "Construí toda minha plataforma de curso — site, Telegram Mini App pra entrega dos módulos e checkout — em uma tarde. Dois meses depois, rodando sem encostar no código.",
+          "Construí toda a minha plataforma de curso — site, área dos membros e checkout — em uma tarde. Dois meses depois, rodando sem encostar no código.",
       },
       {
         initials: "CM",
@@ -200,7 +200,7 @@ export const copy = {
         name: "Carlos M.",
         role: "Coach fitness",
         quote:
-          "Antes da CodeFlying eu emendava Wix, Calendly e Zapier. Agora tá tudo num lugar só e meus clientes agendam direto pelo WhatsApp. Cortei a conta de ferramentas de $187 pra $29 por mês.",
+          "Antes da CodeFlying eu emendava Wix, Calendly e Zapier. Agora meu site de agendamento tá todo num lugar só. Cortei a conta de ferramentas de $187 pra $29 por mês.",
       },
       {
         initials: "YT",
