@@ -56,23 +56,6 @@ function DiscordIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-/**
- * Telegram glyph (paper plane).
- */
-function TelegramIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M9.04 16.7l-.39 5.5c.55 0 .79-.24 1.08-.52l2.6-2.49 5.4 3.93c.99.55 1.7.26 1.96-.91l3.56-16.65c.31-1.45-.52-2.02-1.5-1.66L1.93 9.07C.5 9.64.52 10.45 1.69 10.81l5.14 1.6 11.93-7.51c.56-.37 1.07-.17.65.2z" />
-    </svg>
-  );
-}
-
 export function Footer() {
   return (
     <footer className="bg-dark-deeper text-white/80 mt-auto">
