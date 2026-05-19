@@ -21,7 +21,7 @@ export type AnalyticsEvent =
   | "view_dashboard"
   | "click_refund_request"
   | "complete_refund"
-  | "click_whatsapp_owner";
+  | "click_discord";
 
 export interface EventProperties {
   [key: string]: string | number | boolean | undefined;

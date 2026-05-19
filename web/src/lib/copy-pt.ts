@@ -225,7 +225,7 @@ export const copy = {
       "Website + Telegram Mini App + WhatsApp Flow",
       "Sem comissão sobre venda",
       "Templates pra creator brasileiro",
-      "Suporte em português via WhatsApp",
+      "Suporte em português via Discord",
       "LGPD compliant by default",
     ],
     ctaPrimary: "Garantir minha vaga — R$ 9,90",
@@ -280,7 +280,7 @@ export const copy = {
       },
       {
         q: "Suporte é em português?",
-        a: "Sim, humano, via WhatsApp em horário comercial BR.",
+        a: "Sim, humano, via Discord em horário comercial BR.",
       },
       {
         q: "R$ 9,90 é reembolsável?",
@@ -321,7 +321,7 @@ export const copy = {
           { label: "Privacidade", href: "https://vvx03gck2p.feishu.cn/wiki/RmK9w8INBiN7i4kaDQUcpxZan1d", external: true },
           { label: "Termos", href: "https://vvx03gck2p.feishu.cn/wiki/VE1qwVSjTirnTSkYlGVcbYMsnze", external: true },
           { label: "Meus dados (LGPD)", href: "/meus-dados" },
-          { label: "Suporte (WhatsApp)", href: "#whatsapp", whatsapp: true },
+          { label: "Suporte (Discord)", href: "#discord", discord: true },
         ],
       },
     },
@@ -360,7 +360,7 @@ export const copy = {
       submit: "Me avisar quando lançar",
       submitLoading: "Salvando...",
       confirmation:
-        "Beleza! Te avisaremos pelo WhatsApp e por aqui quando lançar.",
+        "Beleza! Te avisaremos quando lançar.",
       errorGeneric: "Tivemos um problema. Tente de novo.",
       alreadyEmailOnly:
         "Você já está na nossa lista! Te avisaremos quando lançar.",
@@ -437,7 +437,7 @@ export const copy = {
     nextStepsLabel: "Próximos passos",
     nextSteps: [
       "Q3 2026: lançamento oficial",
-      "Você é notificado via WhatsApp",
+      "Você será notificado quando chegar a hora",
       "Crédito aplicado automaticamente",
     ],
     refundLabel: "Solicitar reembolso",
@@ -450,14 +450,14 @@ export const copy = {
     refundSuccess:
       "Reembolso solicitado. Aparece na sua conta em até 5-10 dias úteis.",
     refundError:
-      "Não conseguimos processar o reembolso automaticamente. Entre em contato pelo WhatsApp.",
+      "Não conseguimos processar o reembolso automaticamente. Entre em contato pelo Discord.",
     invalidToken: "Link inválido ou expirado. Entre de novo pela página principal.",
     homeLink: "Voltar pra home →",
     loading: "Carregando...",
     refundedOnDate: "Reembolsado em {date}",
     softTitleEmailOnly: "Beleza, {firstName}! Você está na nossa lista.",
     softBodyEmailOnly:
-      "Vamos te avisar pelo WhatsApp e pelo email cadastrado quando lançarmos.",
+      "Vamos te avisar pelo email cadastrado quando lançarmos.",
     softBodyIntent:
       "Seu pagamento ainda não foi confirmado. Caso queira tentar novamente, volte pra página principal.",
     survey: {
@@ -485,7 +485,7 @@ export const copy = {
     paidSub: "Levando você pra dashboard...",
     timeoutTitle: "Pagamento processando",
     timeoutBody:
-      "Seu pagamento ainda está sendo verificado pelo Stripe. Vamos te avisar pelo WhatsApp assim que confirmarmos. Você também pode tentar atualizar esta página em alguns minutos.",
+      "Seu pagamento ainda está sendo verificado pelo Stripe. Vamos te avisar assim que confirmarmos. Você também pode tentar atualizar esta página em alguns minutos.",
     homeLink: "Voltar pra home",
   },
 
@@ -509,8 +509,7 @@ export const copy = {
     miniAppBuyLabel: "Comprar",
   },
 
-  whatsapp: {
-    greeting: "Olá! Vim do site da CodeFlying e queria saber mais.",
-    navAriaLabelFloating: "Conversar no WhatsApp",
+  discord: {
+    navAriaLabelFloating: "Entrar no Discord",
   },
 } as const;
