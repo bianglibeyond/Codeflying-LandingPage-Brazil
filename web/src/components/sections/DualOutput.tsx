@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { copy } from "@/lib/copy";
 import { cn } from "@/lib/utils";
 
@@ -30,18 +31,24 @@ export function DualOutput() {
             icon="🌐"
             bullets={copy.dualOutput.siteBullets as unknown as string[]}
             accent="coral"
+            imageSrc="/demo/website.png"
+            imageAlt="Generated website preview"
           />
           <Panel
             title={copy.dualOutput.tgTitle}
             icon="✈️"
             bullets={copy.dualOutput.tgBullets as unknown as string[]}
             accent="telegram"
+            imageSrc="/demo/telegram-mini-app.png"
+            imageAlt="Generated Telegram Mini App preview"
           />
           <Panel
             title={copy.dualOutput.waTitle}
             icon="💬"
             bullets={copy.dualOutput.waBullets as unknown as string[]}
             accent="whatsapp"
+            imageSrc="/demo/whatsapp-flow.png"
+            imageAlt="Generated WhatsApp Flow preview"
           />
         </div>
 
@@ -58,11 +65,15 @@ function Panel({
   icon,
   bullets,
   accent,
+  imageSrc,
+  imageAlt,
 }: {
   title: string;
   icon: string;
   bullets: string[];
   accent: "coral" | "telegram" | "whatsapp";
+  imageSrc: string;
+  imageAlt: string;
 }) {
   const accentBg =
     accent === "coral"
@@ -76,12 +87,6 @@ function Panel({
       : accent === "telegram"
         ? "bg-telegram"
         : "bg-[#25D366]";
-  const previewLabel =
-    accent === "coral"
-      ? "Site"
-      : accent === "telegram"
-        ? "Telegram"
-        : "WhatsApp";
 
   return (
     <div className="flex flex-col gap-5 rounded-md bg-white p-6 sm:p-8 border border-hairline">
@@ -93,12 +98,16 @@ function Panel({
       </div>
 
       <div
-        className="aspect-[4/3] rounded-sm overflow-hidden"
+        className="relative aspect-[3/2] rounded-sm overflow-hidden"
         style={{ backgroundColor: accentBg }}
       >
-        <div className="h-full w-full flex items-center justify-center text-muted text-body-sm">
-          {previewLabel}
-        </div>
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          sizes="(min-width: 768px) 33vw, 100vw"
+          className="object-cover"
+        />
       </div>
 
       <ul className="flex flex-col gap-2 text-body">
