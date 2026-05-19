@@ -115,15 +115,6 @@ export function Footer() {
               >
                 <XIcon size={18} />
               </a>
-              <a
-                href="https://t.me/codeflying"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Telegram"
-                className="rounded-full p-2 bg-white/5 hover:bg-white/10 transition-colors"
-              >
-                <TelegramIcon size={18} />
-              </a>
             </div>
           </div>
 
