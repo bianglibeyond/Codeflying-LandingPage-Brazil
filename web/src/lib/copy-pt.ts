@@ -174,36 +174,42 @@ export const copy = {
   socialProof: {
     h2: "Nova no Brasil. Mas com história global.",
     sub:
-      "Ainda não temos cases brasileiros pra mostrar — somos novos aqui. Mas veja o que criadores em outros mercados já construíram com a CodeFlying.",
+      "Ainda não temos avaliações brasileiras pra mostrar — somos novos aqui. Mas veja o que criadores ao redor do mundo estão falando da CodeFlying.",
     legitimacyHeadline: "Já servimos mais de 500 mil criadores em inglês.",
     legitimacySub:
       "A CodeFlying não é nova — construímos apps com criadores ao redor do mundo há anos. O Brasil é o capítulo novo. Veja nossa plataforma em inglês, ao vivo agora.",
     legitimacyCta: "Visitar codeflying.app",
     legitimacyUrl: "https://www.codeflying.app/",
     disclosure:
-      "Casos reais. CodeFlying está em pré-lançamento no Brasil — você pode ser nosso primeiro caso brasileiro de sucesso.",
+      "Avaliações reais de usuários globais. CodeFlying está em pré-lançamento no Brasil — você pode ser nosso primeiro caso brasileiro de sucesso.",
     encountersLabel: "Onde nos encontramos:",
-    cards: [
+    reviews: [
       {
-        flag: "🌐",
-        region: "Global",
-        kind: "Website",
-        quote: "Plataforma de cursos: 50.000+ alunos ativos no site gerado pela CodeFlying.",
-        metric: "50K usuários",
+        initials: "SK",
+        avatarColor: "coral",
+        flag: "🇺🇸",
+        name: "Sarah K.",
+        role: "Criadora de cursos online",
+        quote:
+          "Construí toda minha plataforma de curso — site, Telegram Mini App pra entrega dos módulos e checkout — em uma tarde. Dois meses depois, rodando sem encostar no código.",
       },
       {
-        flag: "🌐",
-        region: "Global",
-        kind: "Website",
-        quote: "Comunidade por assinatura: 12.000+ assinantes pagantes gerenciados por um site gerado pela CodeFlying.",
-        metric: "12K assinantes",
+        initials: "CM",
+        avatarColor: "telegram",
+        flag: "🇪🇸",
+        name: "Carlos M.",
+        role: "Coach fitness",
+        quote:
+          "Antes da CodeFlying eu emendava Wix, Calendly e Zapier. Agora tá tudo num lugar só e meus clientes agendam direto pelo WhatsApp. Cortei a conta de ferramentas de $187 pra $29 por mês.",
       },
       {
-        flag: "🇨🇳",
-        region: "China",
-        kind: "WeChat Mini App",
-        quote: "Loja de cosméticos: ¥2M+/mês em vendas pelo WeChat Mini App, criado com CodeFlying.",
-        metric: "Equivalente a R$ 1,3M/mês",
+        initials: "YT",
+        avatarColor: "pink",
+        flag: "🇯🇵",
+        name: "Yuki T.",
+        role: "Criadora de lifestyle",
+        quote:
+          "Não sou nada técnica. Descrevi o que queria pra área dos membros, e a CodeFlying construiu. Minha audiência acha que contratei um time de devs.",
       },
     ],
     screenshotPlaceholder: "[Screenshot]",

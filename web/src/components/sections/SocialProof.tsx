@@ -1,12 +1,12 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import { copy } from "@/lib/copy";
+import { cn } from "@/lib/utils";
 
 /**
  * Social proof section (PLAN §4 Section 7).
  * "New in Brazil. With global history." — authentic positioning.
- * Includes a prominent legitimacy card linking to the global English platform
- * so BR users can verify CodeFlying exists at scale elsewhere.
- * 3 cards: global creator success cases. Warm-tinted substrate.
+ * Includes a prominent legitimacy card linking to the global English platform,
+ * followed by 3 user reviews from global creators.
  */
 export function SocialProof() {
   return (
@@ -33,7 +33,6 @@ export function SocialProof() {
           rel="noopener noreferrer"
           className="group mb-12 block rounded-md bg-white border-2 border-coral/30 hover:border-coral hover:shadow-lg transition-all p-6 sm:p-8 relative overflow-hidden"
         >
-          {/* Soft coral gradient backdrop */}
           <div
             aria-hidden
             className="absolute inset-0 -z-0 opacity-40 pointer-events-none"
@@ -51,9 +50,7 @@ export function SocialProof() {
                 {copy.socialProof.legitimacySub}
               </p>
             </div>
-            <div
-              className="inline-flex items-center justify-center gap-2 shrink-0 rounded-full bg-coral text-white px-6 py-3 text-body font-semibold shadow-coral group-hover:-translate-y-0.5 transition-transform"
-            >
+            <div className="inline-flex items-center justify-center gap-2 shrink-0 rounded-full bg-coral text-white px-6 py-3 text-body font-semibold shadow-coral group-hover:-translate-y-0.5 transition-transform">
               <span>{copy.socialProof.legitimacyCta}</span>
               <ArrowUpRight size={18} aria-hidden />
             </div>
@@ -61,29 +58,16 @@ export function SocialProof() {
         </a>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          {copy.socialProof.cards.map((c, i) => (
-            <article
+          {copy.socialProof.reviews.map((r, i) => (
+            <ReviewCard
               key={i}
-              className="flex flex-col gap-3 rounded-md bg-white p-5 sm:p-6 border border-hairline"
-            >
-              <div className="aspect-[4/3] rounded-sm bg-warm/60 border border-hairline flex items-center justify-center text-caption text-muted">
-                {copy.socialProof.screenshotPlaceholder}
-              </div>
-              <div className="flex items-center gap-2">
-                <span aria-hidden className="text-h4">
-                  {c.flag}
-                </span>
-                <span className="text-body-sm text-muted">
-                  {c.region} · {c.kind}
-                </span>
-              </div>
-              <blockquote className="text-body text-ink leading-snug">
-                &ldquo;{c.quote}&rdquo;
-              </blockquote>
-              <p className="text-body-sm font-semibold text-coral tabular-nums">
-                {c.metric}
-              </p>
-            </article>
+              initials={r.initials}
+              avatarColor={r.avatarColor as "coral" | "telegram" | "pink"}
+              flag={r.flag}
+              name={r.name}
+              role={r.role}
+              quote={r.quote}
+            />
           ))}
         </div>
 
@@ -92,5 +76,65 @@ export function SocialProof() {
         </p>
       </div>
     </section>
+  );
+}
+
+function ReviewCard({
+  initials,
+  avatarColor,
+  flag,
+  name,
+  role,
+  quote,
+}: {
+  initials: string;
+  avatarColor: "coral" | "telegram" | "pink";
+  flag: string;
+  name: string;
+  role: string;
+  quote: string;
+}) {
+  const avatarBg =
+    avatarColor === "coral"
+      ? "bg-coral"
+      : avatarColor === "telegram"
+        ? "bg-telegram"
+        : "bg-pink";
+
+  return (
+    <article className="flex flex-col gap-4 rounded-md bg-white p-6 border border-hairline">
+      <div className="flex gap-0.5" aria-label="5 out of 5 stars">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Star
+            key={i}
+            size={14}
+            className="fill-coral text-coral"
+            aria-hidden
+          />
+        ))}
+      </div>
+
+      <blockquote className="text-body text-ink leading-relaxed flex-1">
+        &ldquo;{quote}&rdquo;
+      </blockquote>
+
+      <div className="flex items-center gap-3 mt-2">
+        <span
+          className={cn(
+            "size-10 rounded-full text-white font-semibold text-body-sm flex items-center justify-center shrink-0",
+            avatarBg,
+          )}
+          aria-hidden
+        >
+          {initials}
+        </span>
+        <div className="flex flex-col leading-tight">
+          <span className="text-body-sm font-semibold text-ink">
+            {name} <span aria-hidden>{flag}</span>
+          </span>
+          <span className="text-caption text-muted">{role}</span>
+        </div>
+      </div>
+    </article>
   );
 }
