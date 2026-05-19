@@ -277,7 +277,6 @@ export const copy = {
         links: [
           { label: "Privacy", href: "https://vvx03gck2p.feishu.cn/wiki/RmK9w8INBiN7i4kaDQUcpxZan1d", external: true },
           { label: "Terms", href: "https://vvx03gck2p.feishu.cn/wiki/VE1qwVSjTirnTSkYlGVcbYMsnze", external: true },
-          { label: "My data (LGPD)", href: "/meus-dados" },
           { label: "Support (Discord)", href: "#discord", discord: true },
         ],
       },
