@@ -41,13 +41,13 @@ export const copy = {
     templates: [
       { id: "infoproduto", label: "Loja de infoproduto", icon: "🌐", channel: "tg" },
       { id: "restaurante", label: "Restaurante + WhatsApp Flow", icon: "💬", channel: "wa" },
-      { id: "bot-vip", label: "Telegram Mini App VIP", icon: "✈️", channel: "tg" },
+      { id: "bot-vip", label: "Coaching online", icon: "✈️", channel: "tg" },
       { id: "salao", label: "Salão de beleza no WhatsApp", icon: "💬", channel: "wa" },
     ],
     templatePrompts: {
       infoproduto: "Quero vender meu curso online com Pix e grupo VIP",
       restaurante: "Cardápio do restaurante + pedidos no WhatsApp + agendamento",
-      "bot-vip": "Telegram Mini App VIP com cobrança recorrente",
+      "bot-vip": "Coaching online com comunidade VIP no Telegram + mensalidade",
       salao: "Salão: agendamento no WhatsApp + lembretes",
     },
     ctaPrimary: "Garantir minha vaga — R$ 9,90",
