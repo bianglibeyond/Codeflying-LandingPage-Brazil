@@ -165,8 +165,9 @@ function PayForm() {
         <span>
           {copy.modal.pay.fields.lgpd}{" "}
           <a
-            href="/privacidade"
+            href="https://vvx03gck2p.feishu.cn/wiki/RmK9w8INBiN7i4kaDQUcpxZan1d"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-coral underline"
           >
             {copy.modal.pay.fields.lgpdReadLink}
@@ -326,8 +327,9 @@ function EmailForm() {
         <span>
           {copy.modal.pay.fields.lgpd}{" "}
           <a
-            href="/privacidade"
+            href="https://vvx03gck2p.feishu.cn/wiki/RmK9w8INBiN7i4kaDQUcpxZan1d"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-coral underline"
           >
             {copy.modal.pay.fields.lgpdReadLink}

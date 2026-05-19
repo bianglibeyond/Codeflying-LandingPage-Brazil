@@ -275,8 +275,8 @@ export const copy = {
       company: {
         title: "Company",
         links: [
-          { label: "Privacy", href: "/privacidade" },
-          { label: "Terms", href: "/termos" },
+          { label: "Privacy", href: "https://vvx03gck2p.feishu.cn/wiki/RmK9w8INBiN7i4kaDQUcpxZan1d", external: true },
+          { label: "Terms", href: "https://vvx03gck2p.feishu.cn/wiki/VE1qwVSjTirnTSkYlGVcbYMsnze", external: true },
           { label: "My data (LGPD)", href: "/meus-dados" },
           { label: "Support (WhatsApp)", href: "#whatsapp", whatsapp: true },
         ],

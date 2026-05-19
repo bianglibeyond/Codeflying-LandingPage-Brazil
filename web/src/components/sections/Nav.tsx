@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { copy } from "@/lib/copy";
@@ -32,10 +33,15 @@ export function Nav() {
         aria-label={copy.footer.navAriaLabel}
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6"
       >
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-h4 font-bold tracking-tight text-ink">
-            {copy.brand.name}
-          </span>
+        <Link href="/" className="flex items-center gap-2" aria-label={copy.brand.name}>
+          <Image
+            src="/codeflying-logo.svg"
+            alt={copy.brand.name}
+            width={156}
+            height={32}
+            priority
+            className="h-7 w-auto sm:h-8"
+          />
         </Link>
 
         <div className="flex items-center gap-4">

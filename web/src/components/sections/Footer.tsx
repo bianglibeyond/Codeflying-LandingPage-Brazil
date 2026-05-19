@@ -137,6 +137,15 @@ export function Footer() {
                     >
                       {link.label}
                     </a>
+                  ) : "external" in link && link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-body-sm text-white/70 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </a>
                   ) : (
                     <a
                       href={link.href}

@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/Button";
@@ -127,8 +128,14 @@ function Shell({ children }: { children: React.ReactNode }) {
     <div className="bg-substrate min-h-screen flex flex-col">
       <header className="bg-substrate border-b border-hairline">
         <div className="mx-auto max-w-3xl px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="text-h4 font-bold text-ink">
-            CodeFlying
+          <Link href="/" aria-label="CodeFlying">
+            <Image
+              src="/codeflying-logo.svg"
+              alt="CodeFlying"
+              width={156}
+              height={32}
+              className="h-7 w-auto"
+            />
           </Link>
         </div>
       </header>
