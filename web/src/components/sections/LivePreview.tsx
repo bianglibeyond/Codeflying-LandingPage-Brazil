@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { copy } from "@/lib/copy";
@@ -23,6 +24,36 @@ function channelFor(templateId: string): Channel {
   return ((template as { channel?: Channel } | undefined)?.channel ?? "tg") as Channel;
 }
 
+/**
+ * Per-template screenshot pair. Falls back to case1 if id isn't mapped.
+ */
+const TEMPLATE_IMAGES: Record<string, { website: string; phone: string; alt: string }> = {
+  infoproduto: {
+    website: "/cases/case1-website-infoproduct.png",
+    phone: "/cases/case1-phone-telegram.png",
+    alt: "Info-product storefront with Telegram VIP delivery",
+  },
+  restaurante: {
+    website: "/cases/case2-website-restaurant.png",
+    phone: "/cases/case2-phone-whatsapp.png",
+    alt: "Restaurant menu with WhatsApp Flow ordering",
+  },
+  "bot-vip": {
+    website: "/cases/case3-website-coaching.png",
+    phone: "/cases/case3-phone-telegram-coaching.png",
+    alt: "Online coaching site with Telegram VIP community",
+  },
+  salao: {
+    website: "/cases/case4-website-salon.png",
+    phone: "/cases/case4-phone-whatsapp-salon.png",
+    alt: "Beauty salon booking site with WhatsApp scheduling",
+  },
+};
+
+function imagesFor(templateId: string) {
+  return TEMPLATE_IMAGES[templateId] ?? TEMPLATE_IMAGES.infoproduto;
+}
+
 export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
   const reduceMotion = useReducedMotion();
   const channel = channelFor(activeTemplate);
@@ -35,15 +66,13 @@ export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
           <BrowserMockup
             activeTemplate={activeTemplate}
             animate={!reduceMotion}
-            wide
           />
           {/* Phone overlaps bottom-right of browser, bottoms aligned */}
-          <div className="absolute right-0 bottom-0 w-[32%] z-10">
+          <div className="absolute right-0 bottom-0 w-[28%] z-10">
             <PhoneMockup
               activeTemplate={activeTemplate}
               channel={channel}
               animate={!reduceMotion}
-              compact
             />
           </div>
         </div>
@@ -62,15 +91,13 @@ export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
           <BrowserMockup
             activeTemplate={activeTemplate}
             animate={!reduceMotion}
-            compact
           />
         </div>
-        <div className="absolute right-0 bottom-[-8%] w-[38%]">
+        <div className="absolute right-0 bottom-[-8%] w-[34%]">
           <PhoneMockup
             activeTemplate={activeTemplate}
             channel={channel}
             animate={!reduceMotion}
-            compact
           />
         </div>
       </div>
@@ -84,24 +111,13 @@ export function LivePreview({ activeTemplate, variant }: LivePreviewProps) {
 function BrowserMockup({
   activeTemplate,
   animate,
-  compact = false,
-  wide = false,
 }: {
   activeTemplate: string;
   animate: boolean;
-  compact?: boolean;
-  /** Wide variant for desktop staggered-overlap: full width, taller aspect, more content. */
-  wide?: boolean;
 }) {
+  const { website, alt } = imagesFor(activeTemplate);
   return (
-    <div
-      className={cn(
-        "rounded-browser bg-white shadow-md overflow-hidden border border-hairline",
-      )}
-      style={{
-        aspectRatio: wide ? "16/11" : compact ? "16/11" : "5/3",
-      }}
-    >
+    <div className="rounded-browser bg-white shadow-md overflow-hidden border border-hairline">
       {/* Browser chrome */}
       <div className="flex items-center gap-1.5 px-3 py-2 border-b border-hairline bg-warm/50">
         <span className="size-2 rounded-full bg-[#FF5F57]" />
@@ -111,53 +127,23 @@ function BrowserMockup({
           {copy.livePreview.browserUrl}
         </div>
       </div>
-      {/* Browser content — varies by template */}
-      <div className="p-4 flex flex-col gap-3">
-        {/* Animated coral header */}
-        <motion.div
-          key={`browser-header-${activeTemplate}`}
-          initial={animate ? { width: "30%" } : false}
-          animate={{ width: "70%" }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="h-3 rounded-sm bg-coral/80"
+      {/* Website screenshot — fades in when template changes */}
+      <motion.div
+        key={`browser-${activeTemplate}`}
+        initial={animate ? { opacity: 0 } : false}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.35 }}
+        className="relative aspect-[3/2] w-full"
+      >
+        <Image
+          src={website}
+          alt={alt}
+          fill
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className="object-cover object-top"
+          priority
         />
-        <motion.div
-          key={`browser-sub-${activeTemplate}`}
-          initial={animate ? { width: "20%" } : false}
-          animate={{ width: "55%" }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="h-2 rounded-sm bg-hairline"
-        />
-        <motion.div
-          initial={animate ? { width: "15%" } : false}
-          animate={{ width: "40%" }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-          className="h-2 rounded-sm bg-hairline"
-        />
-        <div className="grid grid-cols-2 gap-2 mt-2">
-          <motion.div
-            initial={animate ? { opacity: 0, y: 6 } : false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.4 }}
-            className="aspect-square rounded-sm bg-coral/15"
-          />
-          <motion.div
-            initial={animate ? { opacity: 0, y: 6 } : false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.5 }}
-            className="aspect-square rounded-sm bg-pink/15"
-          />
-        </div>
-        {/* Pay button mockup */}
-        <motion.div
-          initial={animate ? { opacity: 0 } : false}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.7 }}
-          className="mt-2 h-7 rounded-full bg-ink flex items-center justify-center"
-        >
-          <span className="text-[10px] text-white font-semibold">{copy.livePreview.miniAppBuyLabel}</span>
-        </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -166,79 +152,37 @@ function PhoneMockup({
   activeTemplate,
   channel,
   animate,
-  compact = false,
 }: {
   activeTemplate: string;
   channel: Channel;
   animate: boolean;
-  compact?: boolean;
 }) {
-  const isWa = channel === "wa";
-  // WhatsApp green vs Telegram blue
-  const headerBg = isWa ? "#075E54" : "var(--color-telegram)";
-  const handleLabel = isWa ? "Sua Loja" : "@seucanalbot";
-  const accentBg = isWa ? "bg-[#25D366]" : "bg-coral/20";
+  const { phone, alt } = imagesFor(activeTemplate);
+  // Border tint hints at the channel (Telegram blue / WhatsApp green) even
+  // though the screenshot itself already shows the app's full UI.
+  const borderClass =
+    channel === "wa" ? "ring-1 ring-[#25D366]/30" : "ring-1 ring-telegram/30";
 
   return (
-    <div
+    <motion.div
+      key={`phone-${activeTemplate}`}
+      initial={animate ? { opacity: 0, y: 8 } : false}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35 }}
       className={cn(
         "rounded-phone bg-white shadow-md overflow-hidden border border-hairline relative",
+        borderClass,
       )}
-      style={{ aspectRatio: "9/16" }}
+      style={{ aspectRatio: "2/3" }}
     >
-      {/* Header */}
-      <div
-        className="px-3 py-2 flex items-center gap-2"
-        style={{ background: headerBg }}
-      >
-        <div className="size-6 rounded-full bg-white/30" />
-        <div className="text-[9px] text-white font-semibold">{handleLabel}</div>
-      </div>
-      {/* Chat content */}
-      <div className={cn("flex flex-col gap-2 p-3", isWa ? "bg-[#ECE5DD]" : "bg-white")}>
-        {/* Product/booking card animated in */}
-        <motion.div
-          key={`phone-card-${activeTemplate}`}
-          initial={animate ? { opacity: 0, y: 8 } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-          className={cn(
-            "rounded-md border border-hairline p-2 flex flex-col gap-1.5",
-            isWa ? "bg-white" : "bg-warm/30",
-          )}
-        >
-          <div className={cn("h-12 rounded-sm", accentBg)} />
-          <div className="h-2 rounded-sm bg-hairline w-3/4" />
-          <div className="h-1.5 rounded-sm bg-hairline w-1/2" />
-          <motion.div
-            initial={animate ? { opacity: 0 } : false}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.7 }}
-            className={cn(
-              "mt-1 h-5 rounded-full flex items-center justify-center",
-              isWa ? "bg-[#25D366]" : "bg-ink",
-            )}
-          >
-            <span className="text-[8px] text-white font-semibold">
-              {copy.livePreview.miniAppBuyLabel}
-            </span>
-          </motion.div>
-        </motion.div>
-        {/* Chat message bubble */}
-        {!compact && (
-          <motion.div
-            initial={animate ? { opacity: 0, x: -6 } : false}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: 0.6 }}
-            className={cn(
-              "self-start max-w-[80%] rounded-md px-2 py-1",
-              isWa ? "bg-white" : "bg-warm",
-            )}
-          >
-            <div className="h-1.5 rounded-sm bg-hairline w-16" />
-          </motion.div>
-        )}
-      </div>
-    </div>
+      <Image
+        src={phone}
+        alt={alt}
+        fill
+        sizes="(min-width: 768px) 20vw, 40vw"
+        className="object-cover object-top"
+        priority
+      />
+    </motion.div>
   );
 }
