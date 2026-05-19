@@ -282,7 +282,7 @@ export const copy = {
         ],
       },
     },
-    lgpdLine: "© 2026 CodeFlying · LGPD compliant · DPO: dpo@codeflying.app",
+    lgpdLine: "© 2025 KUAFUAI Inc. All rights reserved.",
     navAriaLabel: "Main navigation",
   },
 

@@ -325,7 +325,7 @@ export const copy = {
         ],
       },
     },
-    lgpdLine: "© 2026 CodeFlying · Em conformidade com a LGPD · DPO: dpo@codeflying.app",
+    lgpdLine: "© 2025 KUAFUAI Inc. Todos os direitos reservados.",
     navAriaLabel: "Navegação principal",
   },
 
